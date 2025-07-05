@@ -1,12 +1,16 @@
 import Image from "next/image";
 import { Suspense } from "react";
-import LoginForm from "@/app/ui/login-form";
+import LoginForm from "@/app/ui-components/login-form";
 
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
+        <div className="text-3xl relative flex items-center justify-center">
+            <h1>A.I-enabled Service-request management portal</h1>
+        </div>
+
+        <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 mt-0 md:-mt-0">
           <Suspense fallback={<p>Loading...</p>}>
             <LoginForm />
           </Suspense>

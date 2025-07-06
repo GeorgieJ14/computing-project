@@ -10,8 +10,8 @@ const createUsersTable = `
   );
 `;
 
-const createPostsTable = `
-  CREATE TABLE IF NOT EXISTS posts (
+const createTicketsTable = `
+  CREATE TABLE IF NOT EXISTS tickets (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     title TEXT NOT NULL,
@@ -31,7 +31,13 @@ export const migrateSqlite = () => {
       }
       console.log("Users table created or already exists.");
     });
-    // Create posts table
-    dbSqlite.run(createPostsTable);
+    // Create tickets table
+    dbSqlite.run(createTicketsTable, (err: Error) => {
+      if (err) {
+        console.error("Error creating tickets table: ", err.message);
+        return;
+      }
+      console.log("Tickets table created or already exists.");
+    });
   });
 }

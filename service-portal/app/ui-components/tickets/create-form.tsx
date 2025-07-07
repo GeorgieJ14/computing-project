@@ -1,11 +1,11 @@
 'use client';
 
-import { UserField } from '@/lib/definitions';
+import prisma from '@/lib/database/prisma/prisma';
 import Link from 'next/link';
 import {
   CheckIcon,
   ClockIcon,
-  CurrencyDollarIcon,
+//   CurrencyDollarIcon,
   UserCircleIcon,
   DocumentTextIcon
 } from '@heroicons/react/24/outline';
@@ -13,7 +13,7 @@ import { Button } from '@/app/ui-components/button';
 import { createTicket, State } from '@/lib/actions';
 import { useActionState } from 'react';
 
-export default function Form({ users }: { users: UserField[] }) {
+export default function Form({ users }: { users: typeof prisma.user[] }) {
   const initialState: State = { message: null, errors: {} };
   const [state, formAction] = useActionState(createTicket, initialState);
 

@@ -1,10 +1,10 @@
 'use client';
 
-import { UserField, TicketForm } from '@/lib/definitions';
+import prisma from '@/lib/database/prisma/prisma';
 import {
   CheckIcon,
   ClockIcon,
-  CurrencyDollarIcon,
+//   CurrencyDollarIcon,
   UserCircleIcon,
   DocumentTextIcon
 } from '@heroicons/react/24/outline';
@@ -17,8 +17,8 @@ export default function EditTicketForm({
   Ticket,
   users,
 }: {
-  Ticket: TicketForm;
-  users: UserField[];
+  Ticket: typeof prisma.ticket;
+  users: typeof prisma.user[];
 }) {
   const initialState: State = { message: null, errors: {} };
   const updateTicketWithId = updateTicket.bind(null, Ticket.id);

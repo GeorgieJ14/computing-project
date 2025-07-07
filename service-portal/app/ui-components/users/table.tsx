@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Search from '@/app/ui-components/search';
-import { FormattedUsersTable } from '@/lib/definitions';
+import prisma from '@/lib/database/prisma/prisma';
 
 export default async function UsersTable({
   users,
 }: {
-  users: FormattedUsersTable[];
+  users: typeof prisma.user[];
 }) {
   return (
     <div className="w-full">

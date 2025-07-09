@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import { UpdateTicket, DeleteTicket } from '@/app/ui-components/tickets/buttons';
 import TicketStatus from '@/app/ui-components/tickets/status';
-import { formatDateToLocal, formatCurrency } from '@/lib/utils';
+import { formatDateToLocal } from '@/lib/utils';
+// formatCurrency
 import { fetchFilteredTickets } from '@/lib/data';
+import prisma from '@/lib/database/prisma/prisma';
 
 export default async function TicketsTable({
   query,
@@ -11,7 +13,7 @@ export default async function TicketsTable({
   query: string;
   currentPage: number;
 }) {
-  const tickets = await fetchFilteredTickets(query, currentPage);
+  const tickets: typeof prisma.ticket[] = await fetchFilteredTickets(query, currentPage);
 
   return (
     <div className="mt-6 flow-root">

@@ -129,8 +129,10 @@ export async function updateTicket(
 }
 
 export async function deleteTicket(id: string) {
-  await prisma.ticket.delete({
+  // await prisma.ticket.delete({
+  await prisma.ticket.update({
     where: { id },
+    data: { deletedAt: new Date().toISOString().split('T')[0] },
   });
 
   // sql`DELETE FROM tickets WHERE id = ${id}`;

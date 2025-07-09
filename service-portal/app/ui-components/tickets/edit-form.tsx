@@ -14,14 +14,14 @@ import { updateTicket, State } from '@/lib/actions';
 import { useActionState } from 'react';
 
 export default function EditTicketForm({
-  Ticket,
+  ticket,
   users,
 }: {
-  Ticket: typeof prisma.ticket;
+  ticket: typeof prisma.ticket;
   users: typeof prisma.user[];
 }) {
   const initialState: State = { message: null, errors: {} };
-  const updateTicketWithId = updateTicket.bind(null, Ticket.id);
+  const updateTicketWithId = updateTicket.bind(null, ticket.id);
   const [state, formAction] = useActionState(updateTicketWithId, initialState);
 
   return (
@@ -37,7 +37,7 @@ export default function EditTicketForm({
               id="user"
               name="userId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue={Ticket.user_id}
+              defaultValue={ticket.user_id}
               aria-describedby="user-error"
             >
               <option value="" disabled>
@@ -73,7 +73,7 @@ export default function EditTicketForm({
                 id="details"
                 name="details"
                 type="text"
-                defaultValue={Ticket.details}
+                defaultValue={ticket.details}
                 placeholder="Enter your request/complaint details"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
                 aria-describedby="details-error"
@@ -105,7 +105,7 @@ export default function EditTicketForm({
                   name="status"
                   type="radio"
                   value="pending"
-                  defaultChecked={Ticket.status === 'pending'}
+                  defaultChecked={ticket.status === 'pending'}
                   className="h-4 w-4 border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label
@@ -121,7 +121,7 @@ export default function EditTicketForm({
                   name="status"
                   type="radio"
                   value="resolved"
-                  defaultChecked={Ticket.status === 'resolved'}
+                  defaultChecked={ticket.status === 'resolved'}
                   className="h-4 w-4 border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                 />
                 <label

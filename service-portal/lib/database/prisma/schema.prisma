@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "../../../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -21,13 +21,42 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  tickets       Ticket[]
+  assignedTickets Ticket[] @relation("AssignedToUser")
+  comments      Comment[]
+  attachments   Attachment[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime? // Soft delete field
+
+  createdUsers  User[] @relation("UsersCreatedByUser")
+  updatedUsers  User[] @relation("UsersUpdatedByUser")
+  deletedUsers  User[] @relation("UsersDeletedByUser")
+  createdTickets Ticket[] @relation("TicketsCreatedByUser")
+  updatedTickets Ticket[] @relation("TicketsUpdatedByUser")
+  deletedTickets Ticket[] @relation("TicketsDeletedByUser")
+  createdComments Comment[] @relation("CommentsCreatedByUser")
+  updatedComments Comment[] @relation("CommentsUpdatedByUser")
+  deletedComments Comment[] @relation("CommentsDeletedByUser")
+  createdAttachments Attachment[] @relation("AttachmentsCreatedByUser")
+  updatedAttachments Attachment[] @relation("AttachmentsUpdatedByUser")
+  deletedAttachments Attachment[] @relation("AttachmentsDeletedByUser")
+  createdCategories Category[] @relation("CategoriesCreatedByUser")
+  updatedCategories Category[] @relation("CategoriesUpdatedByUser")
+  deletedCategories Category[] @relation("CategoriesDeletedByUser")
+
+
+  createdById   String  @default("-1rootUser") // User ID of the creator
+  updatedById   String? // User ID of the last updater
+  deletedById   String? // User ID of the deleter
+  createdByUser User @relation(name: "UsersCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  updatedByUser User? @relation(name: "UsersUpdatedByUser", fields: [updatedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  deletedByUser User? @relation(name: "UsersDeletedByUser", fields: [deletedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
 }
- 
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -43,7 +72,8 @@ model Account {
   session_state     String?
  
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime? // Soft delete field
  
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
@@ -83,4 +113,103 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@id([userId, credentialID])
+}
+
+model Ticket {
+  id          String    @id @default(cuid())
+  userId      String    @default("-1anonymous")
+  details     String
+  title       String
+  date        DateTime  @default(now())
+  status      String    @default("open") // e.g., open, in-progress, closed
+  priority    String    @default("medium") // e.g., low, medium, high
+  assignedTo  String?   // User ID of the person assigned to the ticket
+  tags        String?   // Array of tags for categorization
+  categoryId  String?   // e.g., "technical", "billing", "general"
+  comments    Comment[]
+  attachments Attachment[]
+ 
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+  deletedAt   DateTime? // Soft delete field
+
+  createdById String  @default("-1rootUser") // User ID of the creator
+  updatedById String? // User ID of the last updater
+  deletedById String? // User ID of the deleter
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  assignedToUser User? @relation(name: "AssignedToUser", fields: [assignedTo], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  createdByUser User     @relation(name: "TicketsCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  updatedByUser User?    @relation(name: "TicketsUpdatedByUser", fields: [updatedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  deletedByUser User?   @relation(name: "TicketsDeletedByUser", fields: [deletedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+}
+
+model Comment {
+  id          String   @id @default(cuid())
+  ticketId    String  @default("-1anonymous")
+  userId      String  @default("-1anonymous")
+  content     String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt
+  deletedAt   DateTime?
+
+  createdById String  @default("-1rootUser") // User ID of the creator
+  updatedById String? // User ID of the last updater
+  deletedById String? // User ID of the deleter
+
+  ticket      Ticket   @relation(fields: [ticketId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  createdByUser User     @relation(name: "CommentsCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  updatedByUser User?    @relation(name: "CommentsUpdatedByUser", fields: [updatedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  deletedByUser User?   @relation(name: "CommentsDeletedByUser", fields: [deletedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+}
+
+model Attachment {
+  id          String   @id @default(cuid())
+  ticketId    String   @default("-1anonymous")
+  userId      String   @default("-1anonymous")
+  type        String   // e.g., "image", "document", "video"
+  contentType String?  // MIME type of the attachment, e.g. "image/png", "application/pdf"
+  fileName    String
+  size        Int? // Size in bytes
+  description String?
+  url         String?   // URL to the attachment
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt
+  deletedAt   DateTime? // Soft delete field
+
+  createdById String  @default("-1rootUser") // User ID of the creator
+  updatedById String? // User ID of the last updater
+  deletedById String? // User ID of the deleter
+
+  ticket      Ticket @relation(fields: [ticketId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  user        User   @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  createdByUser User     @relation(name: "AttachmentsCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  updatedByUser User?    @relation(name: "AttachmentsUpdatedByUser", fields: [updatedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  deletedByUser User?   @relation(name: "AttachmentsDeletedByUser", fields: [deletedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  tickets     Ticket[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt
+  deletedAt   DateTime? // Soft delete field
+
+  createdById String  @default("-1rootUser") // User ID of the creator
+  updatedById String? // User ID of the last updater
+  deletedById String? // User ID of the deleter
+
+  createdByUser User     @relation(name: "CategoriesCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  updatedByUser User?    @relation(name: "CategoriesUpdatedByUser", fields: [updatedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  deletedByUser User?   @relation(name: "CategoriesDeletedByUser", fields: [deletedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
 }

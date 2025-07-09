@@ -9,7 +9,11 @@ export async function fetchTickets() {
     // console.log('Fetching tickets data...');
     // await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const data = await prisma.ticket.findMany();
+    const data = await prisma.ticket.findMany({
+      where: {
+        deletedAt: null,
+      },
+    });
     // sql<Ticket[]>`SELECT * FROM tickets`;
 
     // console.log('Data fetch completed after 3 seconds.');
@@ -37,6 +41,9 @@ export async function fetchLatestTickets() {
           },
         },
       },
+      where: {
+        deletedAt: null,
+      },
     });
     /* sql<Ticket[]>`
       SELECT tickets.details, users.name, users.image_url, users.email, tickets.id
@@ -62,9 +69,17 @@ export async function fetchCardData() {
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
     // how to initialize multiple queries in parallel with JS.
-    const ticketCountPromise = prisma.ticket.count();
+    const ticketCountPromise = prisma.ticket.count({
+      where: {
+        deletedAt: null,
+      },
+    });
     // sql`SELECT COUNT(*) FROM tickets`;
-    const userCountPromise = prisma.user.count();
+    const userCountPromise = prisma.user.count({
+      where: {
+        deletedAt: null,
+      },
+    });
     // sql`SELECT COUNT(*) FROM users`;
     const ticketStatusPromise = prisma.ticket.groupBy({
       by: ['status'],
@@ -75,6 +90,7 @@ export async function fetchCardData() {
         status: {
           in: ['resolved', 'pending'],
         },
+        deletedAt: null,
       },
     });
     /* sql`SELECT
@@ -115,6 +131,10 @@ export async function fetchFilteredTickets(
   try {
     const tickets = await prisma.ticket.findMany({
       where: {
+        deletedAt: null,
+        user: {
+          deletedAt: null,
+        },
         OR: [
           {
             user: {
@@ -200,6 +220,10 @@ export async function fetchTicketsPages(query: string) {
   try {
     const data = await prisma.ticket.count({
       where: {
+        deletedAt: null,
+        user: {
+          deletedAt: null,
+        },
         OR: [
           {
             user: {
@@ -263,6 +287,10 @@ export async function fetchTicketById(id: string) {
     const data = await prisma.ticket.findUnique({
       where: {
         id: id,
+        deletedAt: null,
+        user: {
+          deletedAt: null,
+        }
       },
       include: {
         user: {
@@ -302,6 +330,9 @@ export async function fetchTicketById(id: string) {
 export async function fetchUsers() {
   try {
     const users = await prisma.user.findMany({
+      where: {
+        deletedAt: null,
+      },
       orderBy: {
         name: 'asc',
       },
@@ -325,6 +356,10 @@ export async function fetchFilteredUsers(query: string) {
   try {
     const data = await prisma.user.findMany({
       where: {
+        deletedAt: null,
+        tickets: {
+          deletedAt: null,
+        },
         OR: [
           {
             name: {

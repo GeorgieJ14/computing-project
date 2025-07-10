@@ -2,11 +2,16 @@
 
 import { z } from 'zod';
 // import postgres from 'postgres';
+import bcrypt from 'bcrypt';
 import prisma from '@/lib/database/prisma/prisma';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
-import { AuthError } from 'next-auth';
+import { AuthError, CredentialsSignin } from 'next-auth';
+import AdapterError from 'next-auth';
+import EmailSignInError from 'next-auth';
+import SignInError from 'next-auth';
+import Verification from 'next-auth';
 
 // const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -146,7 +151,11 @@ export async function authenticate(
   try {
     await signIn('credentials', formData);
   } catch (error) {
-    if (error instanceof AuthError) {
+    /* console.log('here-moreinfo', error instanceof (Error) ? error.cause + ' -here-123- ' + error.message : 'Unknown error');
+    return 'Invalid credentials. Please try again.'; */
+    if (error instanceof AuthError || error instanceof CredentialsSignin
+    ) {
+      // console.log('Authenticating user error...', error.type);
       switch (error.type) {
         case 'CredentialsSignin':
           return 'Invalid credentials.';
@@ -154,6 +163,34 @@ export async function authenticate(
           return 'Something went wrong.';
       }
     }
+    if (error instanceof AdapterError || error instanceof EmailSignInError ||
+      error instanceof SignInError || error instanceof Verification || error instanceof Error
+    ) {
+      return 'Invalid credentials. Please try again.';
+    }
+    // console.log('12After switch-case user-error...', error instanceof AuthError ? error.type : 'Unknown type');
     throw error;
   }
+}
+
+export async function registerUser(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await prisma.user.create({
+      data: {
+        name: formData.get('fullName') as string,
+        email: formData.get('email') as string,
+        password: await bcrypt.hash(formData.get('password') as string, 10),
+      },
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      return error.message;
+    }
+    return 'Failed to register user.';
+  }
+  revalidatePath('/dashboard');
+  redirect('/dashboard');
 }

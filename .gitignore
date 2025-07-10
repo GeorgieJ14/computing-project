@@ -19,3 +19,4 @@ buildNumber.properties
 # SQLite database file
 service-portal/lib/database/db.sqlite3
 service-portal/lib/database/prisma/dev-sqlite.db
+service-portal/lib/database/prisma/dev-sqlite.db-journal

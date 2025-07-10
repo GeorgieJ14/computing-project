@@ -17,8 +17,9 @@ model User {
   name          String?
   // email      String    @unique
   email         String?   @unique
+  password      String
   emailVerified DateTime?
-  image         String?
+  image_url     String?
   accounts      Account[]
   sessions      Session[]
   tickets       Ticket[]
@@ -49,10 +50,10 @@ model User {
   deletedCategories Category[] @relation("CategoriesDeletedByUser")
 
 
-  createdById   String  @default("-1rootUser") // User ID of the creator
+  createdById   String?  // @default("-1rootUser") // User ID of the creator
   updatedById   String? // User ID of the last updater
   deletedById   String? // User ID of the deleter
-  createdByUser User @relation(name: "UsersCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  createdByUser User? @relation(name: "UsersCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   updatedByUser User? @relation(name: "UsersUpdatedByUser", fields: [updatedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   deletedByUser User? @relation(name: "UsersDeletedByUser", fields: [deletedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
 }
@@ -117,7 +118,7 @@ model Authenticator {
 
 model Ticket {
   id          String    @id @default(cuid())
-  userId      String    @default("-1anonymous")
+  userId      String    // @default("-1anonymous")
   details     String
   title       String
   date        DateTime  @default(now())
@@ -133,7 +134,7 @@ model Ticket {
   updatedAt   DateTime? @updatedAt
   deletedAt   DateTime? // Soft delete field
 
-  createdById String  @default("-1rootUser") // User ID of the creator
+  createdById String?  // @default("-1rootUser") // User ID of the creator
   updatedById String? // User ID of the last updater
   deletedById String? // User ID of the deleter
 
@@ -141,37 +142,37 @@ model Ticket {
   category    Category? @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   assignedToUser User? @relation(name: "AssignedToUser", fields: [assignedTo], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
-  createdByUser User     @relation(name: "TicketsCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  createdByUser User?     @relation(name: "TicketsCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   updatedByUser User?    @relation(name: "TicketsUpdatedByUser", fields: [updatedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   deletedByUser User?   @relation(name: "TicketsDeletedByUser", fields: [deletedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
 }
 
 model Comment {
   id          String   @id @default(cuid())
-  ticketId    String  @default("-1anonymous")
-  userId      String  @default("-1anonymous")
+  ticketId    String  // @default("-1anonymous")
+  userId      String  // @default("-1anonymous")
   content     String
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime? @updatedAt
   deletedAt   DateTime?
 
-  createdById String  @default("-1rootUser") // User ID of the creator
+  createdById String?  // @default("-1rootUser") // User ID of the creator
   updatedById String? // User ID of the last updater
   deletedById String? // User ID of the deleter
 
   ticket      Ticket   @relation(fields: [ticketId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   user        User     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
-  createdByUser User     @relation(name: "CommentsCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  createdByUser User?     @relation(name: "CommentsCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   updatedByUser User?    @relation(name: "CommentsUpdatedByUser", fields: [updatedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   deletedByUser User?   @relation(name: "CommentsDeletedByUser", fields: [deletedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
 }
 
 model Attachment {
   id          String   @id @default(cuid())
-  ticketId    String   @default("-1anonymous")
-  userId      String   @default("-1anonymous")
+  ticketId    String   // @default("-1anonymous")
+  userId      String   // @default("-1anonymous")
   type        String   // e.g., "image", "document", "video"
   contentType String?  // MIME type of the attachment, e.g. "image/png", "application/pdf"
   fileName    String
@@ -183,14 +184,14 @@ model Attachment {
   updatedAt   DateTime? @updatedAt
   deletedAt   DateTime? // Soft delete field
 
-  createdById String  @default("-1rootUser") // User ID of the creator
+  createdById String?  // @default("-1rootUser") // User ID of the creator
   updatedById String? // User ID of the last updater
   deletedById String? // User ID of the deleter
 
   ticket      Ticket @relation(fields: [ticketId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   user        User   @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
-  createdByUser User     @relation(name: "AttachmentsCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  createdByUser User?     @relation(name: "AttachmentsCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   updatedByUser User?    @relation(name: "AttachmentsUpdatedByUser", fields: [updatedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   deletedByUser User?   @relation(name: "AttachmentsDeletedByUser", fields: [deletedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
 }
@@ -205,11 +206,11 @@ model Category {
   updatedAt   DateTime? @updatedAt
   deletedAt   DateTime? // Soft delete field
 
-  createdById String  @default("-1rootUser") // User ID of the creator
+  createdById String?  // @default("-1rootUser") // User ID of the creator
   updatedById String? // User ID of the last updater
   deletedById String? // User ID of the deleter
 
-  createdByUser User     @relation(name: "CategoriesCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  createdByUser User?     @relation(name: "CategoriesCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   updatedByUser User?    @relation(name: "CategoriesUpdatedByUser", fields: [updatedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   deletedByUser User?   @relation(name: "CategoriesDeletedByUser", fields: [deletedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
 }

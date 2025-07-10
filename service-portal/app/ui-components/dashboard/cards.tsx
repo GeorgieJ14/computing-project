@@ -26,11 +26,7 @@ export default async function CardWrapper() {
       <Card title="Resolved" value={totalResolvedTickets} type="resolved" />
       <Card title="Pending" value={totalPendingTickets} type="pending" />
       <Card title="Total Tickets" value={numberOfTickets} type="tickets" />
-      <Card
-        title="Total Users"
-        value={numberOfUsers}
-        type="users"
-      />
+      <Card title="Total Users" value={numberOfUsers} type="users" />
     </>
   );
 }

@@ -1,18 +1,19 @@
 import type { NextAuthConfig } from 'next-auth';
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import prisma from "@/lib/database/prisma/prisma"
+/* import { PrismaAdapter } from "@auth/prisma-adapter"
+import prisma from "@/lib/database/prisma/prisma" */
 
 export const authConfig = {
   pages: {
-    signIn: '/login',
+    signIn: '',
   },
-  adapter: PrismaAdapter(prisma),
+  // adapter: PrismaAdapter(prisma),
   providers: [
     // added later in auth.ts since it requires bcrypt which is only compatible with Node.js
     // while this file is also used in non-Node.js environments
   ],
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
+      // console.log('auth.config.ts - callback - Checking authorization...');
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
       if (isOnDashboard) {

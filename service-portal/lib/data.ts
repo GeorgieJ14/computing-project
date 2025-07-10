@@ -1,3 +1,5 @@
+// 'use server';
+
 // import postgres from 'postgres';
 // import { formatCurrency } from './utils';
 import prisma from "@/lib/database/prisma/prisma";
@@ -20,14 +22,18 @@ export async function fetchTickets() {
 
     return data;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch tickets data.');
+    console.error('1Database Error:', error);
+    // throw new Error('Failed to fetch tickets data.');
+    return []; // Return an empty array in case of error
   }
 }
 
 export async function fetchLatestTickets() {
   try {
     const data = await prisma.ticket.findMany({
+      where: {
+        deletedAt: null,
+      },
       orderBy: {
         date: 'desc',
       },
@@ -40,9 +46,7 @@ export async function fetchLatestTickets() {
             email: true,
           },
         },
-      },
-      where: {
-        deletedAt: null,
+        attachments: true
       },
     });
     /* sql<Ticket[]>`
@@ -59,8 +63,9 @@ export async function fetchLatestTickets() {
     })); */
     return latestTickets;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch the latest tickets.');
+    console.error('2Database Error:', error);
+    // throw new Error('Failed to fetch the latest tickets.');
+    return []; // Return an empty array in case of error
   }
 }
 
@@ -106,8 +111,8 @@ export async function fetchCardData() {
 
     const numberOfTickets = Number(data[0].count ?? '0');
     const numberOfUsers = Number(data[1].count ?? '0');
-    const totalResolvedTickets = data[2][0].resolved ?? '0';
-    const totalPendingTickets = data[2][0].pending ?? '0';
+    const totalResolvedTickets = Number(data[2][0] ? data[2][0].resolved : '0');
+    const totalPendingTickets = Number(data[2][0] ? data[2][0].pending : '0');
 
     return {
       numberOfUsers,
@@ -116,8 +121,19 @@ export async function fetchCardData() {
       totalPendingTickets,
     };
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch card data.');
+    console.error('3Database Error:', error);
+    // throw new Error('Failed to fetch card data.');
+
+    const numberOfUsers = 0;
+    const numberOfTickets = 0;
+    const totalResolvedTickets = 0;
+    const totalPendingTickets = 0;
+    return {
+      numberOfUsers,
+      numberOfTickets,
+      totalResolvedTickets,
+      totalPendingTickets,
+    };
   }
 }
 
@@ -129,64 +145,90 @@ export async function fetchFilteredTickets(
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
-    const tickets = await prisma.ticket.findMany({
-      where: {
-        deletedAt: null,
-        user: {
+    let tickets;
+    if (query && query.length > 0) {
+      tickets = await prisma.ticket.findMany({
+        where: {
           deletedAt: null,
-        },
-        OR: [
-          {
-            user: {
-              name: {
-                contains: query,
-                mode: 'insensitive',
+          user: {
+            deletedAt: null,
+          },
+          OR: [
+            {
+              user: {
+                name: {
+                  contains: query,
+                  // mode: 'insensitive',
+                },
               },
             },
-          },
-          {
-            user: {
-              email: {
-                contains: query,
-                mode: 'insensitive',
+            {
+              user: {
+                email: {
+                  contains: query,
+                  // mode: 'insensitive',
+                },
               },
             },
-          },
-          {
-            details: {
-              contains: query,
-              mode: 'insensitive',
+            {
+              details: {
+                contains: query,
+                // mode: 'insensitive',
+              },
             },
-          },
-          {
-            date: {
-              contains: query,
-              mode: 'insensitive',
+            {
+              date: {
+                contains: query,
+                // mode: 'insensitive',
+              },
             },
-          },
-          {
-            status: {
-              contains: query,
-              mode: 'insensitive',
+            {
+              status: {
+                contains: query,
+                // mode: 'insensitive',
+              },
             },
-          },
-        ],
-      },
-      include: {
-        user: {
-          select: {
-            name: true,
-            email: true,
-            image_url: true,
+          ],
+        },
+        include: {
+          user: {
+            select: {
+              name: true,
+              email: true,
+              image_url: true,
+            },
           },
         },
-      },
-      orderBy: {
-        date: 'desc',
-      },
-      take: ITEMS_PER_PAGE,
-      skip: offset,
-    });
+        orderBy: {
+          date: 'desc',
+        },
+        take: ITEMS_PER_PAGE,
+        skip: offset,
+      });
+    } else {
+      tickets = await prisma.ticket.findMany({
+        where: {
+          deletedAt: null,
+          user: {
+            deletedAt: null,
+          },
+        },
+        include: {
+          user: {
+            select: {
+              name: true,
+              email: true,
+              image_url: true,
+            },
+          },
+        },
+        orderBy: {
+          date: 'desc',
+        },
+        take: ITEMS_PER_PAGE,
+        skip: offset,
+      });
+    }
 
     /* sql<TicketsTable[]>`
       SELECT
@@ -211,57 +253,71 @@ export async function fetchFilteredTickets(
 
     return tickets;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch tickets.');
+    console.error('4Database Error:', error);
+    // throw new Error('Failed to fetch tickets.');
+
+    return []; // Return an empty array in case of error
   }
 }
 
 export async function fetchTicketsPages(query: string) {
   try {
-    const data = await prisma.ticket.count({
-      where: {
-        deletedAt: null,
-        user: {
+    let data;
+    if (query && query.length > 0) {
+      data = await prisma.ticket.count({
+        where: {
           deletedAt: null,
+          user: {
+            deletedAt: null,
+          },
+          OR: [
+            {
+              user: {
+                name: {
+                  contains: query,
+                  // mode: 'insensitive',
+                },
+              },
+            },
+            {
+              user: {
+                email: {
+                  contains: query,
+                  // mode: 'insensitive',
+                },
+              },
+            },
+            {
+              details: {
+                contains: query,
+                // mode: 'insensitive',
+              },
+            },
+            {
+              date: {
+                contains: query,
+                // mode: 'insensitive',
+              },
+            },
+            {
+              status: {
+                contains: query,
+                // mode: 'insensitive',
+              },
+            },
+          ],
         },
-        OR: [
-          {
-            user: {
-              name: {
-                contains: query,
-                mode: 'insensitive',
-              },
-            },
+      });
+    } else {
+      data = await prisma.ticket.count({
+        where: {
+          deletedAt: null,
+          user: {
+            deletedAt: null,
           },
-          {
-            user: {
-              email: {
-                contains: query,
-                mode: 'insensitive',
-              },
-            },
-          },
-          {
-            details: {
-              contains: query,
-              mode: 'insensitive',
-            },
-          },
-          {
-            date: {
-              contains: query,
-              mode: 'insensitive',
-            },
-          },
-          {
-            status: {
-              contains: query,
-              mode: 'insensitive',
-            },
-          },
-        ],
-      },
-    });
+        },
+      });
+    }
 
     /* sql`SELECT COUNT(*)
     FROM tickets
@@ -274,11 +330,12 @@ export async function fetchTicketsPages(query: string) {
       tickets.status ILIKE ${`%${query}%`}
   `; */
 
-    const totalPages = Math.ceil(Number(data[0].count) / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(Number(data[0] ? data[0].count : 0) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch total number of tickets.');
+    console.error('5Database Error:', error);
+    // throw new Error('Failed to fetch total number of tickets.');
+    return 0; // Return 0 in case of error
   }
 }
 
@@ -322,8 +379,9 @@ export async function fetchTicketById(id: string) {
 
     return ticket[0];
   } catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch ticket.');
+    console.error('6Database Error:', error);
+    // throw new Error('Failed to fetch ticket.');
+    return null; // Return null in case of error
   }
 }
 
@@ -347,39 +405,63 @@ export async function fetchUsers() {
 
     return users;
   } catch (err) {
-    console.error('Database Error:', err);
-    throw new Error('Failed to fetch all users.');
+    console.error('7Database Error:', err);
+    // throw new Error('Failed to fetch all users.');
+    return [];
   }
 }
 
 export async function fetchFilteredUsers(query: string) {
   try {
+    if (query && query.length > 0) {
+      // console.log("Checking: ", query.length);
+      const data = await prisma.user.findMany({
+        where: {
+          deletedAt: null,
+          /* tickets: {
+            deletedAt: null,
+          }, */
+          OR: [
+            {
+              name: {
+                contains: query,
+                // mode: 'insensitive',
+              },
+            },
+            {
+              email: {
+                contains: query,
+                // mode: 'insensitive',
+              },
+            },
+          ],
+        },
+        include: {
+          tickets: {
+            select: {
+              id: true,
+              status: true,
+              deletedAt: true,
+            },
+          },
+        },
+        orderBy: {
+          name: 'asc',
+        },
+      });
+      return data;
+    }
+
     const data = await prisma.user.findMany({
       where: {
         deletedAt: null,
-        tickets: {
-          deletedAt: null,
-        },
-        OR: [
-          {
-            name: {
-              contains: query,
-              mode: 'insensitive',
-            },
-          },
-          {
-            email: {
-              contains: query,
-              mode: 'insensitive',
-            },
-          },
-        ],
       },
       include: {
         tickets: {
           select: {
             id: true,
             status: true,
+            deletedAt: true,
           },
         },
       },
@@ -406,16 +488,17 @@ export async function fetchFilteredUsers(query: string) {
     ORDER BY users.name ASC
     `; */
 
-    const users = data;
+    // const users = data;
     /* .map((user) => ({
       ...user,
       total_pending: user.total_pending,
       total_resolved: user.total_resolved,
     })); */
 
-    return users;
+    return data;
   } catch (err) {
-    console.error('Database Error:', err);
-    throw new Error('Failed to fetch user table.');
+    console.error('8Database Error:', err);
+    // throw new Error('Failed to fetch user table.');
+    return []; // Return an empty array in case of error
   }
 }

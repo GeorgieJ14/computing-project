@@ -29,15 +29,15 @@ export default async function TicketsTable({
                   <div>
                     <div className="mb-2 flex items-center">
                       <Image
-                        src={ticket.image_url}
-                        className="mr-2 rounded-full"
+                        src={ticket.attachments ? '/' + ticket.attachments[0].fileName : '/file.svg'}
+                        className={`${ticket.attachments ? '' : 'hidden'} mr-2 rounded-full`}
                         width={28}
                         height={28}
-                        alt={`${ticket.name}'s profile picture`}
+                        alt={`${ticket.title}'s picture`}
                       />
-                      <p>{ticket.name}</p>
+                      <p>{ticket.title}</p>
                     </div>
-                    <p className="text-sm text-gray-500">{ticket.email}</p>
+                    <p className="text-sm text-gray-500">{formatDateToLocal(ticket.date)}</p>
                   </div>
                   <TicketStatus status={ticket.status} />
                 </div>
@@ -88,17 +88,17 @@ export default async function TicketsTable({
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
                       <Image
-                        src={ticket.image_url}
-                        className="rounded-full"
+                        src={ticket.attachments ? '/' + ticket.attachments[0].fileName : '/file.svg'}
+                        className={`${ticket.attachments ? '' : 'hidden'} rounded-full`}
                         width={28}
                         height={28}
-                        alt={`${ticket.name}'s profile picture`}
+                        alt={`${ticket.title}'s picture`}
                       />
-                      <p>{ticket.name}</p>
+                      <p>{ticket.title}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {ticket.email}
+                    {formatDateToLocal(ticket.date)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {ticket.details}

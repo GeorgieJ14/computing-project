@@ -23,20 +23,36 @@ const FormSchema = z.object({
   details: z.string({
     message: 'Please enter details about your complaint / request.',
   }),
+  name: z.string({
+    message: 'Please enter category name.',
+  }),
+  description: z.string({
+    message: 'Please enter category-details.',
+  }),
   status: z.enum(['pending', 'resolved'], {
     invalid_type_error: 'Please select a ticket status.',
   }),
   date: z.string(),
 });
 
-const CreateTicket = FormSchema.omit({ id: true, date: true });
-const UpdateTicket = FormSchema.omit({ date: true, id: true });
+const CreateTicket = FormSchema.pick({ userId: true, details: true, status: true });
+const CreateCategory = FormSchema.pick({ name: true, description: true });
+const UpdateCategory = FormSchema.pick({ name: true, description: true });
+const UpdateTicket = FormSchema.pick({ userId: true, details: true, status: true });
 
 export type State = {
   errors?: {
     userId?: string[];
     details?: string[];
     status?: string[];
+  };
+  message?: string | null;
+};
+
+export type CategoryState = {
+  errors?: {
+    name?: string[];
+    description?: string[];
   };
   message?: string | null;
 };
@@ -86,6 +102,86 @@ export async function createTicket(prevState: State, formData: FormData) {
   // Revalidate the cache for the tickets page and redirect the user.
   revalidatePath('/dashboard/tickets');
   redirect('/dashboard/tickets');
+}
+
+export async function createCategory(prevState: CategoryState, formData: FormData) {
+  // Validate form fields using Zod
+  const validatedFields = CreateCategory.safeParse({
+    name: formData.get('name'),
+    description: formData.get('description'),
+    // status: formData.get('status'),
+  });
+
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Create Category.',
+    };
+  }
+
+  // Prepare data for insertion into the database
+  const { name, description } = validatedFields.data;
+  // const date = new Date().toISOString().split('T')[0];
+
+  // Insert data into the database
+  try {
+    await prisma.category.create({
+      data: {
+        name,
+        description,
+      },
+    });
+  } catch (error) {
+    // If a database error occurs, return a more specific error.
+    return {
+      message: 'Database Error: Failed to Create Category.',
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+  }
+  
+  // Revalidate the cache for the categories page and redirect the user.
+  revalidatePath('/dashboard/categories');
+  redirect('/dashboard/categories');
+}
+
+
+export async function updateCategory(
+  id: string,
+  prevState: CategoryState,
+  formData: FormData,
+) {
+  const validatedFields = UpdateCategory.safeParse({
+    name: formData.get('name'),
+    description: formData.get('description'),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Missing Fields. Failed to Update Category.',
+    };
+  }
+
+  const { name, description } = validatedFields.data;
+
+  try {
+    await prisma.category.update({
+      where: { id },
+      data: {
+        name,
+        description,
+      },
+    });
+  } catch (error) {
+    return {
+      message: 'Database Error: Failed to Update Category.',
+      error: error instanceof Error ? error.message : 'Unknown error',
+    };
+  }
+  
+  revalidatePath('/dashboard/categories');
+  redirect('/dashboard/categories');
 }
 
 export async function updateTicket(
@@ -142,6 +238,17 @@ export async function deleteTicket(id: string) {
 
   // sql`DELETE FROM tickets WHERE id = ${id}`;
   revalidatePath('/dashboard/tickets');
+}
+
+export async function deleteCategory(id: string) {
+  // await prisma.category.delete({
+  await prisma.category.update({
+    where: { id },
+    data: { deletedAt: new Date().toISOString().split('T')[0] },
+  });
+
+  // sql`DELETE FROM categories WHERE id = ${id}`;
+  revalidatePath('/dashboard/categories');
 }
 
 export async function authenticate(

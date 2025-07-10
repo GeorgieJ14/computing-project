@@ -3,6 +3,7 @@
 // import postgres from 'postgres';
 // import { formatCurrency } from './utils';
 import prisma from "@/lib/database/prisma/prisma";
+// import { Prisma } from '@prisma/client'
 
 // const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -166,7 +167,7 @@ export async function fetchFilteredTickets(
               user: {
                 email: {
                   contains: query,
-                  // mode: 'insensitive',
+                  // mode: Prisma.QueryMode.insensitive,
                 },
               },
             },
@@ -260,6 +261,46 @@ export async function fetchFilteredTickets(
   }
 }
 
+export async function fetchFilteredCategories(
+  /* query: string,
+  currentPage: number, */
+) {
+  // const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const categories = await prisma.category.findMany({
+      where: {
+        deletedAt: null,
+        /* tickets: {
+          deletedAt: null,
+        }, */
+      },
+      /* include: {
+        tickets: {
+          select: {
+            id: true,
+            title: true,
+            details: true,
+            date: true,
+            status: true,
+          },
+        },
+      }, */
+      orderBy: {
+        name: 'asc',
+      },
+      // take: ITEMS_PER_PAGE,
+      // skip: offset,
+    });
+    return categories;
+  } catch (error) {
+    console.error('4catsDatabase Error:', error);
+    // throw new Error('Failed to fetch categories.');
+    
+    return []; // Return an empty array in case of error
+  }
+}
+
 export async function fetchTicketsPages(query: string) {
   try {
     let data;
@@ -283,7 +324,7 @@ export async function fetchTicketsPages(query: string) {
               user: {
                 email: {
                   contains: query,
-                  // mode: 'insensitive',
+                  // mode: Prisma.QueryMode.insensitive,
                 },
               },
             },
@@ -336,6 +377,34 @@ export async function fetchTicketsPages(query: string) {
     console.error('5Database Error:', error);
     // throw new Error('Failed to fetch total number of tickets.');
     return 0; // Return 0 in case of error
+  }
+}
+
+export async function fetchCategoryById(id: string) {
+  try {
+    const data = await prisma.category.findUnique({
+      where: {
+        id: id,
+        deletedAt: null,
+        /* user: {
+          deletedAt: null,
+        } */
+      },
+      /* include: {
+        user: {
+          select: {
+            name: true,
+            email: true,
+            image_url: true,
+          },
+        },
+      }, */
+    });
+    return data[0];
+  } catch (error) {
+    console.error('6catsDatabase Error:', error);
+    // throw new Error('Failed to fetch ticket.');
+    return null; // Return null in case of error
   }
 }
 
@@ -431,7 +500,7 @@ export async function fetchFilteredUsers(query: string) {
             {
               email: {
                 contains: query,
-                // mode: 'insensitive',
+                // mode: Prisma.QueryMode.insensitive,
               },
             },
           ],

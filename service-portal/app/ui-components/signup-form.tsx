@@ -6,8 +6,9 @@ import { useActionState } from "react";
 import { registerUser } from "@/lib/actions";
 import { Button } from "@/app/ui-components/button";
 import { useSearchParams } from "next/navigation";
+import prisma from "@/lib/database/prisma/prisma";
 
-export default function SignUpForm() {
+export default function SignUpForm({ roles }: { roles: typeof prisma.role[] }) {
   const callbackUrl = useSearchParams().get('callbackUrl') || "/dashboard";
   // new URL(window.location.href);
   const [errorMessage, formAction, isPending] = useActionState(registerUser, undefined); // Added state management
@@ -56,6 +57,27 @@ export default function SignUpForm() {
               py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
               minLength={6} />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2
+              -translate-y-1/2 h-[18px] w-[18px] text-gray-500 peer-focus:text-gray-900" />
+            </div>
+          </div>
+
+          <div>
+            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900"
+            htmlFor="userRole">
+              User-Role
+            </label>
+            <div className="relative">
+              <select id="userRole" name="userRole" required
+              className="peer block w-full rounded-md border border-gray-200
+              py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500">
+                <option value="" disabled>Select your user-role</option>
+                {roles.map((role) => (
+                  <option key={role.id} value={role.id}>
+                    {role.name}
+                  </option>
+                ))}
+              </select>
+              <UserIcon className="pointer-events-none absolute left-3 top-1/2
               -translate-y-1/2 h-[18px] w-[18px] text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>

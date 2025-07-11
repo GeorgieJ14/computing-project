@@ -3,7 +3,13 @@
 // import postgres from 'postgres';
 // import { formatCurrency } from './utils';
 import prisma from "@/lib/database/prisma/prisma";
+import { auth } from "@/auth";
 // import { Prisma } from '@prisma/client'
+import {
+  UserGroupIcon,
+  HomeIcon,
+  DocumentDuplicateIcon,
+} from '@heroicons/react/24/outline';
 
 // const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -454,6 +460,17 @@ export async function fetchTicketById(id: string) {
   }
 }
 
+export async function fetchRoles() {
+  try {
+    const roles = await prisma.role.findMany();
+    return roles;
+  } catch (err) {
+    console.error('7Database Error:', err);
+    // throw new Error('Failed to fetch all roles.');
+    return [];
+  }
+}
+
 export async function fetchUsers() {
   try {
     const users = await prisma.user.findMany({
@@ -570,4 +587,59 @@ export async function fetchFilteredUsers(query: string) {
     // throw new Error('Failed to fetch user table.');
     return []; // Return an empty array in case of error
   }
+}
+
+export async function fetchCurrentUser() {
+  try {
+    const session = await auth();
+    if (!session?.user) {
+      return null; // No user is authenticated
+    }
+
+    const user = await prisma.user.findUnique({
+      where: {
+        email: session.user.email,
+        deletedAt: null,
+      },
+      include: {
+        role: true,
+        /* tickets: {
+          select: {
+            id: true,
+            status: true,
+            deletedAt: true,
+          },
+        }, */
+      },
+    });
+
+    return user;
+  } catch (error) {
+    console.error('9Database Error:', error);
+    // throw new Error('Failed to fetch current user.');
+    return null; // Return null in case of error
+  }
+}
+
+export async function fetchUserMenuLinks() {
+  const links = [
+    { name: 'Home', href: '/dashboard', icon: HomeIcon },
+    { name: 'Tickets', href: '/dashboard/tickets', icon: DocumentDuplicateIcon },
+    { name: 'Categories', href: '/dashboard/categories', icon: DocumentDuplicateIcon },
+    { name: 'Users', href: '/dashboard/users', icon: UserGroupIcon },
+  ];
+  const currentUser = await fetchCurrentUser();
+  if (currentUser?.role?.id) {
+    switch (currentUser.role.id) {
+      case 3: // Service Technician
+        links.splice(2, 2); // Remove 'Categories' and 'Users'
+        break;
+      case 4: // Student
+        links.splice(1, 3); // Remove 'Tickets', 'Categories', and 'Users'
+        break;
+      default:
+        break;
+    }
+  }
+  return links;
 }

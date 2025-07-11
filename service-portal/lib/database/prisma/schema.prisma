@@ -28,6 +28,8 @@ model User {
   attachments   Attachment[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
+  roleId    Int @default(1) // Foreign key to Role-model
+  categoryId Int? // Foreign key to Category-model, if needed
  
   createdAt DateTime @default(now())
   updatedAt DateTime? @updatedAt
@@ -49,6 +51,8 @@ model User {
   updatedCategories Category[] @relation("CategoriesUpdatedByUser")
   deletedCategories Category[] @relation("CategoriesDeletedByUser")
 
+  role  Role  @relation("UserRoles", fields: [roleId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  category Category? @relation("UserCategory", fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
   createdById   String?  // @default("-1rootUser") // User ID of the creator
   updatedById   String? // User ID of the last updater
@@ -117,7 +121,7 @@ model Authenticator {
 }
 
 model Ticket {
-  id          String    @id @default(cuid())
+  id          Int    @id @default(autoincrement())
   userId      String    // @default("-1anonymous")
   details     String
   title       String
@@ -126,7 +130,7 @@ model Ticket {
   priority    String    @default("medium") // e.g., low, medium, high
   assignedTo  String?   // User ID of the person assigned to the ticket
   tags        String?   // Array of tags for categorization
-  categoryId  String?   // e.g., "technical", "billing", "general"
+  categoryId  Int?   // e.g., "technical", "billing", "general"
   comments    Comment[]
   attachments Attachment[]
  
@@ -148,8 +152,8 @@ model Ticket {
 }
 
 model Comment {
-  id          String   @id @default(cuid())
-  ticketId    String  // @default("-1anonymous")
+  id          Int   @id @default(autoincrement())
+  ticketId    Int  // @default("-1anonymous")
   userId      String  // @default("-1anonymous")
   content     String
 
@@ -170,8 +174,8 @@ model Comment {
 }
 
 model Attachment {
-  id          String   @id @default(cuid())
-  ticketId    String   // @default("-1anonymous")
+  id          Int   @id @default(autoincrement())
+  ticketId    Int   // @default("-1anonymous")
   userId      String   // @default("-1anonymous")
   type        String   // e.g., "image", "document", "video"
   contentType String?  // MIME type of the attachment, e.g. "image/png", "application/pdf"
@@ -197,10 +201,11 @@ model Attachment {
 }
 
 model Category {
-  id          String   @id @default(cuid())
+  id          Int   @id @default(autoincrement())
   name        String   @unique
   description String?
   tickets     Ticket[]
+  users       User[]   @relation("UserCategory")
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime? @updatedAt
@@ -213,4 +218,11 @@ model Category {
   createdByUser User?     @relation(name: "CategoriesCreatedByUser", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   updatedByUser User?    @relation(name: "CategoriesUpdatedByUser", fields: [updatedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
   deletedByUser User?   @relation(name: "CategoriesDeletedByUser", fields: [deletedById], references: [id], onDelete: Restrict, onUpdate: Cascade)
+}
+
+model Role {
+  id          Int   @id @default(autoincrement())
+  name        String   @unique
+  description String?
+  users       User[]   @relation("UserRoles")
 }

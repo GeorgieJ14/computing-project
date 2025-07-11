@@ -33,12 +33,16 @@ const FormSchema = z.object({
     invalid_type_error: 'Please select a ticket status.',
   }),
   date: z.string(),
+  password: z.string(), //.min(6)
+  email: z.string(), //.email(),
+  roleId: z.number(),
 });
 
 const CreateTicket = FormSchema.pick({ userId: true, details: true, status: true });
 const CreateCategory = FormSchema.pick({ name: true, description: true });
 const UpdateCategory = FormSchema.pick({ name: true, description: true });
 const UpdateTicket = FormSchema.pick({ userId: true, details: true, status: true });
+// const CreateUser = FormSchema.pick({ name: true, password: true, email: true, roleId: true });
 
 export type State = {
   errors?: {
@@ -290,6 +294,7 @@ export async function registerUser(
         name: formData.get('fullName') as string,
         email: formData.get('email') as string,
         password: await bcrypt.hash(formData.get('password') as string, 10),
+        roleId: parseInt(formData.get('userRole') as string),
       },
     });
   } catch (error) {
@@ -298,6 +303,7 @@ export async function registerUser(
     }
     return 'Failed to register user.';
   }
+  await authenticate(prevState, formData);
   revalidatePath('/dashboard');
   redirect('/dashboard');
 }

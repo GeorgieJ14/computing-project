@@ -2,8 +2,11 @@ import Image from "next/image";
 import { Suspense } from "react";
 import LoginForm from "@/app/ui-components/login-form";
 import SignUpForm from "@/app/ui-components/signup-form";
+import { fetchRoles } from "@/lib/data";
 
-export default function Home() {
+export default async function Home() {
+  const roles = await fetchRoles();
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -14,7 +17,7 @@ export default function Home() {
         <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 mt-0 md:-mt-0">
           <Suspense fallback={<p>Loading...</p>}>
             <LoginForm />
-            <SignUpForm />
+            <SignUpForm roles={roles} />
           </Suspense>
         </div>
       </main>

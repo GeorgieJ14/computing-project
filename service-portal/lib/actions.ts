@@ -12,6 +12,8 @@ import AdapterError from 'next-auth';
 import EmailSignInError from 'next-auth';
 import SignInError from 'next-auth';
 import Verification from 'next-auth';
+import { writeFile } from 'fs/promises';
+import path from 'path';
 
 // const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -23,6 +25,7 @@ const FormSchema = z.object({
   details: z.string({
     message: 'Please enter details about your complaint / request.',
   }),
+  tags: z.string(),
   name: z.string({
     message: 'Please enter category name.',
   }),
@@ -36,18 +39,20 @@ const FormSchema = z.object({
   password: z.string(), //.min(6)
   email: z.string(), //.email(),
   roleId: z.number(),
+  // attachments: z.file().optional(),
 });
 
-const CreateTicket = FormSchema.pick({ userId: true, details: true, status: true });
+const CreateTicket = FormSchema.pick({ userId: true, details: true, tags: true, status: true });
 const CreateCategory = FormSchema.pick({ name: true, description: true });
 const UpdateCategory = FormSchema.pick({ name: true, description: true });
-const UpdateTicket = FormSchema.pick({ userId: true, details: true, status: true });
+const UpdateTicket = FormSchema.pick({ userId: true, details: true, tags: true, status: true });
 // const CreateUser = FormSchema.pick({ name: true, password: true, email: true, roleId: true });
 
 export type State = {
   errors?: {
     userId?: string[];
     details?: string[];
+    tags?: string[];
     status?: string[];
   };
   message?: string | null;
@@ -66,6 +71,7 @@ export async function createTicket(prevState: State, formData: FormData) {
   const validatedFields = CreateTicket.safeParse({
     userId: formData.get('userId'),
     details: formData.get('details'),
+    tags: formData.get('tags'),
     status: formData.get('status'),
   });
 
@@ -78,17 +84,39 @@ export async function createTicket(prevState: State, formData: FormData) {
   }
 
   // Prepare data for insertion into the database
-  const { userId, details, status } = validatedFields.data;
+  const { userId, details, tags, status } = validatedFields.data;
   const date = new Date().toISOString().split('T')[0];
+  const files = formData.get('attachments');
+  // console.log(files);
+  const filesArray1 = Array.isArray(files) ? await Promise.all(
+    files.map(async (file1) => {
+      const fileObj1 = {
+        userId: userId,
+        fileName: file1.name.replaceAll(' ', '_'),
+        size: file1.size,
+        type: 'image',
+        contentType: file1.type,
+      };
+      await writeFile(
+        path.join(process.cwd(), 'public/file_uploads/ticket_images', fileObj1.fileName),
+        Buffer.from(await file1.arrayBuffer()),
+      );
+      return fileObj1;
+  })) : [];
+
 
   // Insert data into the database
   try {
     await prisma.ticket.create({
       data: {
-        userId,
-        details,
-        status,
-        date,
+        userId: userId,
+        details: details,
+        tags: tags,
+        status: status,
+        date: date,
+        attachments: {
+          create: filesArray1
+        }
       },
     });
     /* sql`
@@ -132,8 +160,13 @@ export async function createCategory(prevState: CategoryState, formData: FormDat
   try {
     await prisma.category.create({
       data: {
-        name,
-        description,
+        name: name,
+        description: description,
+        users: {
+          connect: Array.from(formData.getAll('users') as string[]).map((userId) => ({
+            id: userId,
+          })),
+        },
       },
     });
   } catch (error) {
@@ -175,6 +208,11 @@ export async function updateCategory(
       data: {
         name,
         description,
+        users: {
+          set: Array.from(formData.getAll('users') as string[]).map((userId) => ({
+            id: userId,
+          })),
+        },
       },
     });
   } catch (error) {
@@ -196,6 +234,7 @@ export async function updateTicket(
   const validatedFields = UpdateTicket.safeParse({
     userId: formData.get('userId'),
     details: formData.get('details'),
+    tags: formData.get('tags'),
     status: formData.get('status'),
   });
 
@@ -206,7 +245,7 @@ export async function updateTicket(
     };
   }
 
-  const { userId, details, status } = validatedFields.data;
+  const { userId, details, tags, status } = validatedFields.data;
 
   try {
     await prisma.ticket.update({
@@ -214,6 +253,7 @@ export async function updateTicket(
       data: {
         userId,
         details,
+        tags,
         status,
       },
     });

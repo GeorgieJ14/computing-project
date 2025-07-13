@@ -5,7 +5,7 @@ import {
   // CheckIcon,
   // ClockIcon,
 //   CurrencyDollarIcon,
-//   UserCircleIcon,
+  UserCircleIcon,
   DocumentTextIcon
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -15,10 +15,10 @@ import { useActionState } from 'react';
 
 export default function EditCategoryForm({
   category,
-  /* users, */
+  users,
 }: {
   category: typeof prisma.category;
-  /* users: typeof prisma.user[]; */
+  users: typeof prisma.user[];
 }) {
   const initialState: CategoryState = { message: null, errors: {} };
   const updateCategoryWithId = updateCategory.bind(null, category.id);
@@ -32,25 +32,6 @@ export default function EditCategoryForm({
           <label htmlFor="name" className="mb-2 block text-sm font-medium">
             Enter category-name
           </label>
-          {/* <div className="relative">
-            <select
-              id="name"
-              name="name"
-              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue={category.name}
-              aria-describedby="name-error"
-            >
-              <option value="" disabled>
-                Select a user
-              </option>
-              {users.map((user) => (
-                <option key={user.id} value={user.id}>
-                  {user.name}
-                </option>
-              ))}
-            </select>
-            <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
-          </div> */}
           <div className="relative mt-2 rounded-md">
             <div className="relative">
               <input
@@ -103,6 +84,39 @@ export default function EditCategoryForm({
                   {error}
                 </p>
               ))}
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="users" className="mb-2 block text-sm font-medium">
+            Assigned users
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <p className="mt-2 text-gray-900">
+                {category.users.map((user) => user.name).join(', ')}
+              </p>
+              <select
+                id="users" multiple
+                name="users"
+                className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                defaultValue=""
+                aria-describedby="user-error"
+              >
+                <option value="" disabled>
+                  Select users
+                </option>
+                {users.map((user) => {
+                  const selected = category.users.includes(user.id) ? true : false;
+                  return (
+                    <option key={user.id} value={user.id} selected={selected}>
+                      {user.name}
+                    </option>
+                  );
+                })}
+              </select>
+              <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+            </div>
           </div>
         </div>
 

@@ -7,7 +7,8 @@ import {
   ClockIcon,
 //   CurrencyDollarIcon,
   UserCircleIcon,
-  DocumentTextIcon
+  DocumentTextIcon,
+  PhotoIcon
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui-components/button';
 import { createTicket, State } from '@/lib/actions';
@@ -81,6 +82,63 @@ export default function Form({ users }: { users: typeof prisma.user[] }) {
                   {error}
                 </p>
               ))}
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="tags" className="mb-2 block text-sm font-medium">
+            Enter tags/keywords about your request/complaint.
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <input
+                id="tags"
+                name="tags"
+                type="text"
+                placeholder="Enter tags/keywords about your request/complaint."
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                aria-describedby="tags-error"
+              />
+              <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+            </div>
+          </div>
+
+          <div id="tags-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.tags &&
+              state.errors.tags.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))}
+          </div>
+        </div>
+        
+        <div className="mb-4">
+          <label htmlFor="attachments" className="mb-2 block text-sm font-medium">
+            Upload images related to your request/complaint.
+          </label>
+          <div className="relative mt-2 rounded-md">
+            <div className="relative">
+              <input
+                id="attachments"
+                name="attachments"
+                type="file"
+                multiple accept='image/*'
+                placeholder="Upload images related to your request/complaint."
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                aria-describedby="attachments-error"
+              />
+              <PhotoIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+            </div>
+          </div>
+
+          <div id="attachments-error" aria-live="polite" aria-atomic="true">
+            {/* {state.errors?.attachments &&
+              state.errors.attachments.map((error: string) => (
+                <p className="mt-2 text-sm text-red-500" key={error}>
+                  {error}
+                </p>
+              ))} */}
           </div>
         </div>
 

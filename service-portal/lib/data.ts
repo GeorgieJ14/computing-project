@@ -396,17 +396,17 @@ export async function fetchCategoryById(id: string) {
           deletedAt: null,
         } */
       },
-      /* include: {
-        user: {
-          select: {
+      include: {
+        users: true,
+        /* { select: {
             name: true,
             email: true,
             image_url: true,
           },
-        },
-      }, */
+        }, */
+      },
     });
-    return data[0];
+    return data;
   } catch (error) {
     console.error('6catsDatabase Error:', error);
     // throw new Error('Failed to fetch ticket.');
@@ -432,6 +432,9 @@ export async function fetchTicketById(id: string) {
             image_url: true,
           },
         },
+        attachments: true,
+        category: true, // Include the category if needed
+        assignedToUser: true
       },
     });
 

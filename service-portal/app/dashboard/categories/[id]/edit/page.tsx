@@ -1,6 +1,6 @@
 import Form from '@/app/ui-components/categories/edit-form';
 import Breadcrumbs from '@/app/ui-components/tickets/breadcrumbs';
-import { fetchCategoryById, /* fetchUsers */ } from '@/lib/data';
+import { fetchCategoryById, fetchUsers } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 export default async function Page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
   const id = params.id;
-  const [category, /* users */] = await Promise.all([
+  const [category, users] = await Promise.all([
     fetchCategoryById(id),
-    // fetchUsers(),
+    fetchUsers(),
   ]);
 
   if (!category) {
@@ -32,7 +32,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
           },
         ]}
       />
-      <Form category={category} /* users={users} */ />
+      <Form category={category} users={users} />
     </main>
   );
 }

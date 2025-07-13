@@ -60,16 +60,16 @@ export default async function TicketsTable({
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  User
+                  Title
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Email
+                  Date
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Details
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Date
+                  Tags
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Status
@@ -104,7 +104,7 @@ export default async function TicketsTable({
                     {ticket.details}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(ticket.date)}
+                    {ticket.tags}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     <TicketStatus status={ticket.status} />

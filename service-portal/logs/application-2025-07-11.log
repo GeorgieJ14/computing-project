@@ -194,3 +194,5 @@
 {"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 15.8s","timestamp":"2025-07-11T12:26:34.839Z"}
 {"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/tickets/create ...","timestamp":"2025-07-11T12:26:35.359Z"}
 {"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets/create in 547ms","timestamp":"2025-07-11T12:26:35.401Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard in 235ms","timestamp":"2025-07-11T12:39:22.146Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 283ms","timestamp":"2025-07-11T12:39:34.934Z"}

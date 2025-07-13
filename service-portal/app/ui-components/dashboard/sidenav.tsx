@@ -2,15 +2,20 @@ import Link from 'next/link';
 import NavLinks from '@/app/ui-components/dashboard/nav-links';
 import { PowerIcon } from '@heroicons/react/24/outline';
 import { signOut } from '@/auth';
+import { fetchCurrentUser } from '@/lib/data';
 
-export default function SideNav() {
+export default async function SideNav() {
+  const currentUser = await fetchCurrentUser();
   return (
     <div className="text-gray-900 flex h-full flex-col px-3 py-4 md:px-2">
       <Link
-        className="mb-2 flex h-20 items-end justify-start rounded-md bg-blue-600 p-4 md:h-40"
+        className="mb-2 flex h-20 items-end justify-start rounded-md bg-blue-600 p-4 md:h-20"
         href="/"
       >
         <div className="w-32 text-white md:w-40">
+          <h6 className="text-l font-bold md:text-l">
+            Hi {currentUser.name}, ({currentUser.role.name})
+          </h6>
         </div>
       </Link>
       <div className="text-gray-900 flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">

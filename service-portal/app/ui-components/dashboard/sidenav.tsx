@@ -2,10 +2,12 @@ import Link from 'next/link';
 import NavLinks from '@/app/ui-components/dashboard/nav-links';
 import { PowerIcon } from '@heroicons/react/24/outline';
 import { signOut } from '@/auth';
-import { fetchCurrentUser } from '@/lib/data';
+import { fetchCurrentUser, fetchUserMenuLinks } from '@/lib/data';
 
 export default async function SideNav() {
   const currentUser = await fetchCurrentUser();
+  const menuLinks = await fetchUserMenuLinks();
+
   return (
     <div className="text-gray-900 flex h-full flex-col px-3 py-4 md:px-2">
       <Link
@@ -19,7 +21,7 @@ export default async function SideNav() {
         </div>
       </Link>
       <div className="text-gray-900 flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
-        <NavLinks />
+        <NavLinks menuLinks={menuLinks}/>
         <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
         <form
           action={async () => {

@@ -347,3 +347,11 @@ export async function registerUser(
   revalidatePath('/dashboard');
   redirect('/dashboard');
 }
+
+/* export async function huggingFaceApi(tickets) {
+  return tickets.map(ticket => ({
+    id: ticket.id,
+    category: ticket.category,
+
+  }));
+} */

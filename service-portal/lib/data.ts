@@ -1,15 +1,15 @@
-// 'use server';
+'use server';
 
 // import postgres from 'postgres';
 // import { formatCurrency } from './utils';
 import prisma from "@/lib/database/prisma/prisma";
 import { auth } from "@/auth";
 // import { Prisma } from '@prisma/client'
-import {
+/* import {
   UserGroupIcon,
   HomeIcon,
   DocumentDuplicateIcon,
-} from '@heroicons/react/24/outline';
+} from '@heroicons/react/24/outline'; */
 
 // const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -626,10 +626,10 @@ export async function fetchCurrentUser() {
 
 export async function fetchUserMenuLinks() {
   const links = [
-    { name: 'Home', href: '/dashboard', icon: HomeIcon },
-    { name: 'Tickets', href: '/dashboard/tickets', icon: DocumentDuplicateIcon },
-    { name: 'Categories', href: '/dashboard/categories', icon: DocumentDuplicateIcon },
-    { name: 'Users', href: '/dashboard/users', icon: UserGroupIcon },
+    { name: 'Home', href: '/dashboard', icon: 'HomeIcon' },
+    { name: 'Tickets', href: '/dashboard/tickets', icon: 'DocumentDuplicateIcon' },
+    { name: 'Categories', href: '/dashboard/categories', icon: 'DocumentDuplicateIcon' },
+    { name: 'Users', href: '/dashboard/users', icon: 'UserGroupIcon' },
   ];
   const currentUser = await fetchCurrentUser();
   if (currentUser?.role?.id) {

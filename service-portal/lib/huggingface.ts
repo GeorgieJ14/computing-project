@@ -8,14 +8,21 @@ const client = new InferenceClient(HF_TOKEN);
 
 export async function huggingFaceApi(tickets: {tickets: typeof prisma.ticket[]}) {
   
-
-  // Chat completion API
-  const out = await client.chatCompletion({
+  const chatInput1 = {
     model: "meta-llama/Llama-3.1-8B-Instruct",
     messages: [{ role: "user", content: "Hello, nice to meet you!" }],
     max_tokens: 512
-  });
+  };
+  // Chat completion API
+  const out = await client.chatCompletion(chatInput1);
 
+  await prisma.huggingFaceAPI.create({
+    data: {
+      model: chatInput1.model,
+      prompt: chatInput1.messages[0].content,
+      response: out.choices[0].message,
+    }
+  }); 
 
   console.log(out.choices[0].message);
   return tickets.map(ticket => ({
@@ -23,6 +30,12 @@ export async function huggingFaceApi(tickets: {tickets: typeof prisma.ticket[]})
     category: ticket.category,
 
   }));
+
+  /* // pass multimodal files or URLs as inputs
+  await client.imageToText({
+    model: 'nlpconnect/vit-gpt2-image-captioning',
+    data: await ().blob(),
+  }) */
 }
 
 /* export async function fetchHuggingFaceData() {

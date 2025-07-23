@@ -301,6 +301,8 @@ export async function authenticate(
 ) {
   try {
     await signIn('credentials', formData);
+    revalidatePath('/dashboard');
+    redirect('/dashboard');
   } catch (error) {
     /* console.log('here-moreinfo', error instanceof (Error) ? error.cause + ' -here-123- ' + error.message : 'Unknown error');
     return 'Invalid credentials. Please try again.'; */

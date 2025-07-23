@@ -133,6 +133,7 @@ model Ticket {
   categoryId  Int?   // e.g., "technical", "billing", "general"
   comments    Comment[]
   attachments Attachment[]
+  aiModelLogs HuggingFaceAPI[] @relation("HuggingFaceAPILogs")
  
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
@@ -225,4 +226,18 @@ model Role {
   name        String   @unique
   description String?
   users       User[]   @relation("UserRoles")
+}
+
+model HuggingFaceAPI {
+  id  Int  @id @default(autoincrement())
+  model  String
+  prompt  String
+  response  String
+  ticketId Int?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt
+  deletedAt   DateTime? // Soft delete field
+
+  ticket Ticket? @relation(name: "HuggingFaceAPILogs", fields: [ticketId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 }

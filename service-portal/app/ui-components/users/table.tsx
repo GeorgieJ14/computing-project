@@ -35,6 +35,8 @@ export default async function UsersTable({
                               height={28}
                             />
                             <p>{user.name}</p>
+                            <p>User-role: {user.role.name}</p>
+                            <p>Category: {user.category?.name ?? '---'}</p>
                           </div>
                         </div>
                         <p className="text-sm text-gray-500">
@@ -64,6 +66,12 @@ export default async function UsersTable({
                     <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
                       Name
                     </th>
+                    <th scope='col' className='px-3 py-5 font-medium'>
+                      User-role
+                    </th>
+                    <th scope="col" className="px-3 py-5 font-medium">
+                      Category
+                    </th>
                     <th scope="col" className="px-3 py-5 font-medium">
                       Email
                     </th>
@@ -73,7 +81,7 @@ export default async function UsersTable({
                     <th scope="col" className="px-3 py-5 font-medium">
                       Total Pending
                     </th>
-                    <th scope="col" className="px-4 py-5 font-medium">
+                    <th scope="col" className="px-3 py-5 font-medium">
                       Total Resolved
                     </th>
                   </tr>
@@ -93,6 +101,12 @@ export default async function UsersTable({
                           />
                           <p>{user.name}</p>
                         </div>
+                      </td>
+                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                        {user.role.name}
+                      </td>
+                      <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
+                        {user.category?.name ?? '---'}
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                         {user.email}

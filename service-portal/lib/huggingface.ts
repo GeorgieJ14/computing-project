@@ -6,7 +6,7 @@ import prisma from "./database/prisma/prisma";
 const HF_TOKEN = process.env.HF_TOKEN;
 const client = new InferenceClient(HF_TOKEN);
 
-export async function huggingFaceApi(tickets: {tickets: typeof prisma.ticket[]}) {
+export async function huggingFaceApi(tickets: typeof prisma.ticket[]) {
   
   const chatInput1 = {
     model: "meta-llama/Llama-3.1-8B-Instruct",
@@ -20,16 +20,16 @@ export async function huggingFaceApi(tickets: {tickets: typeof prisma.ticket[]})
     data: {
       model: chatInput1.model,
       prompt: chatInput1.messages[0].content,
-      response: out.choices[0].message,
+      response: out.choices[0].message.content ?? '',
     }
   }); 
 
   console.log(out.choices[0].message);
-  return tickets.map(ticket => ({
-    id: ticket.id,
-    category: ticket.category,
-
+  return tickets.map(ticket => ({...ticket,
+    /* id: ticket.id,
+    category: ticket.category, */
   }));
+
 
   /* // pass multimodal files or URLs as inputs
   await client.imageToText({

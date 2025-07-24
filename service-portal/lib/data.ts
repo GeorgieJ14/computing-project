@@ -48,6 +48,7 @@ export async function fetchLatestTickets() {
       include: {
         user: {
           select: {
+            id: true,
             name: true,
             image_url: true,
             email: true,
@@ -116,10 +117,10 @@ export async function fetchCardData() {
       ticketStatusPromise,
     ]);
 
-    const numberOfTickets = Number(data[0].count ?? '0');
-    const numberOfUsers = Number(data[1].count ?? '0');
-    const totalResolvedTickets = Number(data[2][0] ? data[2][0].resolved : '0');
-    const totalPendingTickets = Number(data[2][0] ? data[2][0].pending : '0');
+    const numberOfTickets = Number(data[0] ?? '0');
+    const numberOfUsers = Number(data[1] ?? '0');
+    const totalResolvedTickets = Number(data[2][0] ?? '0');
+    const totalPendingTickets = Number(data[2][1] ?? '0');
 
     return {
       numberOfUsers,
@@ -183,12 +184,12 @@ export async function fetchFilteredTickets(
                 // mode: 'insensitive',
               },
             },
-            {
+            /* {
               date: {
                 contains: query,
                 // mode: 'insensitive',
               },
-            },
+            }, */
             {
               status: {
                 contains: query,
@@ -200,6 +201,7 @@ export async function fetchFilteredTickets(
         include: {
           user: {
             select: {
+              id: true,
               name: true,
               email: true,
               image_url: true,
@@ -223,6 +225,7 @@ export async function fetchFilteredTickets(
         include: {
           user: {
             select: {
+              id: true,
               name: true,
               email: true,
               image_url: true,
@@ -281,7 +284,7 @@ export async function fetchFilteredCategories(
           deletedAt: null,
         }, */
       },
-      /* include: {
+      include: {
         tickets: {
           select: {
             id: true,
@@ -291,7 +294,14 @@ export async function fetchFilteredCategories(
             status: true,
           },
         },
-      }, */
+        users: {
+          select: {
+            id: true,
+            name: true,
+            role: true
+          }
+        }
+      },
       orderBy: {
         name: 'asc',
       },
@@ -340,12 +350,12 @@ export async function fetchTicketsPages(query: string) {
                 // mode: 'insensitive',
               },
             },
-            {
+            /* {
               date: {
                 contains: query,
                 // mode: 'insensitive',
               },
-            },
+            }, */
             {
               status: {
                 contains: query,
@@ -377,7 +387,7 @@ export async function fetchTicketsPages(query: string) {
       tickets.status ILIKE ${`%${query}%`}
   `; */
 
-    const totalPages = Math.ceil(Number(data[0] ? data[0].count : 0) / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(Number(data ?? 0) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
     console.error('5Database Error:', error);
@@ -386,7 +396,7 @@ export async function fetchTicketsPages(query: string) {
   }
 }
 
-export async function fetchCategoryById(id: string) {
+export async function fetchCategoryById(id: number) {
   try {
     const data = await prisma.category.findUnique({
       where: {
@@ -397,13 +407,15 @@ export async function fetchCategoryById(id: string) {
         } */
       },
       include: {
-        users: true,
-        /* { select: {
+        users: {
+          select: {
+            id: true,
             name: true,
-            email: true,
-            image_url: true,
+            role: true,
+            // image_url: true,
           },
-        }, */
+        },
+        tickets: true
       },
     });
     return data;
@@ -414,7 +426,7 @@ export async function fetchCategoryById(id: string) {
   }
 }
 
-export async function fetchTicketById(id: string) {
+export async function fetchTicketById(id: number) {
   try {
     const data = await prisma.ticket.findUnique({
       where: {
@@ -427,6 +439,7 @@ export async function fetchTicketById(id: string) {
       include: {
         user: {
           select: {
+            id: true,
             name: true,
             email: true,
             image_url: true,
@@ -455,7 +468,7 @@ export async function fetchTicketById(id: string) {
       details: ticket.details / 100,
     })); */
 
-    return ticket[0];
+    return ticket;
   } catch (error) {
     console.error('6Database Error:', error);
     // throw new Error('Failed to fetch ticket.');
@@ -479,6 +492,10 @@ export async function fetchUsers() {
     const users = await prisma.user.findMany({
       where: {
         deletedAt: null,
+      },
+      include: {
+        role: true,
+        category: true
       },
       orderBy: {
         name: 'asc',
@@ -533,6 +550,8 @@ export async function fetchFilteredUsers(query: string) {
               deletedAt: true,
             },
           },
+          role: true,
+          category: true
         },
         orderBy: {
           name: 'asc',
@@ -553,6 +572,8 @@ export async function fetchFilteredUsers(query: string) {
             deletedAt: true,
           },
         },
+        role: true,
+        category: true
       },
       orderBy: {
         name: 'asc',
@@ -601,7 +622,7 @@ export async function fetchCurrentUser() {
 
     const user = await prisma.user.findUnique({
       where: {
-        email: session.user.email,
+        email: session.user.email ?? undefined,
         deletedAt: null,
       },
       include: {

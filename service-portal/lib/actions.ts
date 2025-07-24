@@ -22,6 +22,7 @@ const FormSchema = z.object({
   userId: z.string({
     invalid_type_error: 'Please select a user.',
   }),
+  title: z.string(),
   details: z.string({
     message: 'Please enter details about your complaint / request.',
   }),
@@ -42,15 +43,16 @@ const FormSchema = z.object({
   // attachments: z.file().optional(),
 });
 
-const CreateTicket = FormSchema.pick({ userId: true, details: true, tags: true, status: true });
+const CreateTicket = FormSchema.pick({ userId: true, title: true, details: true, tags: true, status: true });
 const CreateCategory = FormSchema.pick({ name: true, description: true });
 const UpdateCategory = FormSchema.pick({ name: true, description: true });
-const UpdateTicket = FormSchema.pick({ userId: true, details: true, tags: true, status: true });
+const UpdateTicket = FormSchema.pick({ userId: true, title: true, details: true, tags: true, status: true });
 // const CreateUser = FormSchema.pick({ name: true, password: true, email: true, roleId: true });
 
 export type State = {
   errors?: {
     userId?: string[];
+    title?: string[];
     details?: string[];
     tags?: string[];
     status?: string[];
@@ -70,6 +72,7 @@ export async function createTicket(prevState: State, formData: FormData) {
   // Validate form fields using Zod
   const validatedFields = CreateTicket.safeParse({
     userId: formData.get('userId'),
+    title: formData.get('title'),
     details: formData.get('details'),
     tags: formData.get('tags'),
     status: formData.get('status'),
@@ -84,7 +87,7 @@ export async function createTicket(prevState: State, formData: FormData) {
   }
 
   // Prepare data for insertion into the database
-  const { userId, details, tags, status } = validatedFields.data;
+  const { userId, title, details, tags, status } = validatedFields.data;
   const date = new Date().toISOString().split('T')[0];
   const files = formData.get('attachments');
   // console.log(files);
@@ -110,6 +113,7 @@ export async function createTicket(prevState: State, formData: FormData) {
     await prisma.ticket.create({
       data: {
         userId: userId,
+        title: title,
         details: details,
         tags: tags,
         status: status,
@@ -184,7 +188,7 @@ export async function createCategory(prevState: CategoryState, formData: FormDat
 
 
 export async function updateCategory(
-  id: string,
+  id: number,
   prevState: CategoryState,
   formData: FormData,
 ) {
@@ -227,12 +231,13 @@ export async function updateCategory(
 }
 
 export async function updateTicket(
-  id: string,
+  id: number,
   prevState: State,
   formData: FormData,
 ) {
   const validatedFields = UpdateTicket.safeParse({
     userId: formData.get('userId'),
+    title: formData.get('title'),
     details: formData.get('details'),
     tags: formData.get('tags'),
     status: formData.get('status'),
@@ -245,13 +250,14 @@ export async function updateTicket(
     };
   }
 
-  const { userId, details, tags, status } = validatedFields.data;
+  const { userId, title, details, tags, status } = validatedFields.data;
 
   try {
     await prisma.ticket.update({
       where: { id },
       data: {
         userId,
+        title,
         details,
         tags,
         status,
@@ -273,7 +279,7 @@ export async function updateTicket(
   redirect('/dashboard/tickets');
 }
 
-export async function deleteTicket(id: string) {
+export async function deleteTicket(id: number) {
   // await prisma.ticket.delete({
   await prisma.ticket.update({
     where: { id },
@@ -284,7 +290,7 @@ export async function deleteTicket(id: string) {
   revalidatePath('/dashboard/tickets');
 }
 
-export async function deleteCategory(id: string) {
+export async function deleteCategory(id: number) {
   // await prisma.category.delete({
   await prisma.category.update({
     where: { id },

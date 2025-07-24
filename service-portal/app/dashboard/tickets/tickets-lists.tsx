@@ -6,7 +6,8 @@ import Table from '@/app/ui-components/tickets/table';
 // import { CreateTicket } from '@/app/ui-components/tickets/buttons';
 import { Button } from '@/app/ui-components/button';
 import { TicketsTableSkeleton } from '@/app/ui-components/skeletons';
-import { Suspense, useState, useEffect, useCallback } from 'react';
+import { Suspense, useState, useCallback } from 'react';
+// useEffect,
 // import { fetchFilteredTickets, fetchTicketsPages } from '@/lib/data';
 import prisma from '@/lib/database/prisma/prisma';
 // import { Metadata } from 'next';
@@ -38,7 +39,7 @@ export default function TicketsLists(props: {
     })
   }, []);
 
-  useEffect(categorizeTickets1, [categorizeTickets1]);
+  //  useEffect(categorizeTickets1, [categorizeTickets1]);
 
   return (
     <div className="w-full">

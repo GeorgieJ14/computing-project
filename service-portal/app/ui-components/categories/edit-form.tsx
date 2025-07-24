@@ -94,7 +94,7 @@ export default function EditCategoryForm({
           <div className="relative mt-2 rounded-md">
             <div className="relative">
               <p className="mt-2 text-gray-900">
-                {category.users.map((user) => user.name).join(', ')}
+                {category.users?.map((user) => user.name).join(', ')}
               </p>
               <select
                 id="users" multiple
@@ -107,15 +107,30 @@ export default function EditCategoryForm({
                   Select users
                 </option>
                 {users.map((user) => {
-                  const selected = category.users.includes(user.id) ? true : false;
+                  const selected = category.users?.includes(user.id) ? true : false;
                   return (
                     <option key={user.id} value={user.id} selected={selected}>
-                      {user.name}
+                      {user.name}: {user.role.name}
                     </option>
                   );
                 })}
               </select>
               <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
+            </div>
+          </div>
+        </div>
+
+        <div className='mb-4'>
+          <label className='mb-2 block text-sm font-medium'>
+            Assigned tickets
+          </label>
+          <div className='relative mt-2 rounded-md'>
+            <div className='relative'>
+              <ul>
+                {category.tickets?.map((ticket) => (
+                  <li key={ticket.id}>{ticket.title}</li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

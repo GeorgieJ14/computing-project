@@ -37,6 +37,23 @@ export default async function CategoriesTable(/* {
                       /> */}
                       <p>{category.name}</p>
                     </div>
+                    <p>Users: </p>
+                    <ul>
+                      {category.users?.map((user) => (
+                        <li key={user.id}>
+                          {user.name} : {user.role.name}
+                        </li>
+                      ))}
+                    </ul>
+                    <p>Tickets: </p>
+                    <ul>
+                      {category.tickets?.map((ticket) => (
+                        <li key={ticket.id}>
+                          {ticket.title}
+                        </li>
+                      ))}
+
+                    </ul>
                     {/* <p className="text-sm text-gray-500">{formatDateToLocal(category.date)}</p> */}
                   </div>
                   {/* <CategoryStatus status={category.status} /> */}
@@ -59,20 +76,20 @@ export default async function CategoriesTable(/* {
           <table className="hidden min-w-full text-gray-900 md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
-                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+                <th scope="col" className="px-3 py-5 font-medium sm:pl-6">
                   Name
                 </th>
-                {/* <th scope="col" className="px-3 py-5 font-medium">
-                  Email
-                </th> */}
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Users
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Tickets
+                </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Description
                 </th>
                 {/* <th scope="col" className="px-3 py-5 font-medium">
-                  Date
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
-                  Status
+                  Email
                 </th> */}
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
@@ -97,18 +114,32 @@ export default async function CategoriesTable(/* {
                       <p>{category.name}</p>
                     </div>
                   </td>
-                  {/* <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(category.date)}
-                  </td> */}
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <ul>
+                      {category.users?.map((user) => (
+                        <li key={user.id}>
+                          {user.name} : {user.role.name}
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <ul>
+                      {category.tickets?.map((ticket) => (
+                        <li key={ticket.id}>
+                          {ticket.title}
+                        </li>
+                      ))}
+                    </ul>
+                        
+                  </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {category.description}
                   </td>
-                  {/* <td className="whitespace-nowrap px-3 py-3">
-                    {formatDateToLocal(category.date)}
-                  </td> */}
-                  {/* <td className="whitespace-nowrap px-3 py-3">
-                    <CategoryStatus status={category.status} />
-                  </td> */}
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {/* {formatDateToLocal(category.date) */}
+                    {/* <CategoryStatus status={category.status} /> */}
+                  </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
                       <UpdateCategory id={category.id} />

@@ -207,6 +207,7 @@ model Category {
   description String?
   tickets     Ticket[]
   users       User[]   @relation("UserCategory")
+  categorizationPredictions AIModelPrediction[] @relation("CategorizationPrediction")
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime? @updatedAt
@@ -234,10 +235,25 @@ model HuggingFaceAPI {
   prompt  String
   response  String
   ticketId Int?
+  categoryPredictionLogId Int?
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime? @updatedAt
   deletedAt   DateTime? // Soft delete field
 
   ticket Ticket? @relation(name: "HuggingFaceAPILogs", fields: [ticketId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  categoryPredictionLog AIModelPrediction? @relation(name: "ModelAPIResponses", fields: [categoryPredictionLogId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+}
+
+model AIModelPrediction {
+  id Int @id @default(autoincrement())
+  categoryId Int
+  details String?
+  modelResponses HuggingFaceAPI[] @relation("ModelAPIResponses")
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime? @updatedAt
+  deletedAt   DateTime? // Soft delete field
+
+  category Category @relation(name: "CategorizationPrediction", fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 }

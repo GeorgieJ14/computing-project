@@ -268,7 +268,8 @@ export default function EditTicketForm({
           <div className="relative mt-2 rounded-md">
             <div className="relative">
               <p className='mt-2 text-gray-900'>
-                {ticket.assignedToUser?.name ?? 'Not assigned'}
+                {ticket.assignedToUser ? ticket.assignedToUser?.name + ' (' +
+                ticket.assignedToUser?.role?.name + ')' : 'Not assigned'}
               </p>
             </div>
           </div>

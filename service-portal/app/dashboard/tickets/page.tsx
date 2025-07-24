@@ -1,4 +1,4 @@
-import { fetchFilteredTickets, fetchTicketsPages } from "@/lib/data";
+import { fetchCurrentUser, fetchFilteredTickets, fetchTicketsPages } from "@/lib/data";
 import TicketsLists from "@/app/dashboard/tickets/tickets-lists";
 import { Metadata } from "next";
 import Pagination from "@/app/ui-components/tickets/pagination";
@@ -20,9 +20,11 @@ export default async function Page(props: {
 
   const totalPages = await fetchTicketsPages(query);
   const ticketsList1 = await fetchFilteredTickets(query, currentPage);
+  const currentUser = await fetchCurrentUser();
 
   return (
     <TicketsLists ticketsList1={ticketsList1}
+      currentUser={currentUser}
       pagination={<Pagination totalPages={totalPages} />}
       createTicket={<CreateTicket />} />
   );

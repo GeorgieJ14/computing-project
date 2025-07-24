@@ -16,7 +16,7 @@ export default async function SideNav() {
       >
         <div className="w-32 text-white md:w-40">
           <h6 className="text-l font-bold md:text-l">
-            Hi {currentUser.name}, ({currentUser.role.name})
+            Hi {currentUser?.name}, ({currentUser?.role.name})
           </h6>
         </div>
       </Link>

@@ -4,6 +4,7 @@
 // import { formatCurrency } from './utils';
 import prisma from "@/lib/database/prisma/prisma";
 import { auth } from "@/auth";
+import { Prisma } from "@prisma/client";
 // import { Prisma } from '@prisma/client'
 /* import {
   UserGroupIcon,
@@ -151,95 +152,105 @@ export async function fetchFilteredTickets(
   currentPage: number,
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentUser = fetchCurrentUser();
 
+  let queryObj1 = {
+    /* select: undefined,
+    omit: undefined, */
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          image_url: true,
+          role: true
+        },
+      },
+      category: true,
+      assignedToUser: {
+        select: {
+          id: true,
+          name: true,
+          role: true
+        }
+      }
+    },
+    where: {
+      deletedAt: null,
+      user: {
+        id: undefined,
+        deletedAt: null,
+      },
+      OR: undefined,
+      assignedToUser: undefined
+    },
+    orderBy: {
+      date: Prisma.SortOrder.desc,
+    },
+    take: ITEMS_PER_PAGE,
+    skip: offset,
+  };
+  
+  switch (currentUser?.role?.id) {
+    case 3:
+      queryObj1.where.assignedToUser = {
+        id: currentUser.id
+      }
+      break;
+    case 4:
+      queryObj1.where.user = {
+        id: currentUser.id,
+        deletedAt: null
+      }
+      break;
+    default:
+      break;
+  }
+
+  if (query && query.length > 0) {
+    queryObj1.where.OR = [
+      {
+        user: {
+          name: {
+            contains: query,
+            // mode: 'insensitive',
+          },
+        },
+      },
+      {
+        user: {
+          email: {
+            contains: query,
+            // mode: Prisma.QueryMode.insensitive,
+          },
+        },
+      },
+      {
+        details: {
+          contains: query,
+          // mode: 'insensitive',
+        },
+      },
+      /* {
+        date: {
+          contains: query,
+          // mode: 'insensitive',
+        },
+      }, */
+      {
+        status: {
+          contains: query,
+          // mode: 'insensitive',
+        },
+      },
+    ];
+  }
   try {
-    let tickets;
-    if (query && query.length > 0) {
-      tickets = await prisma.ticket.findMany({
-        where: {
-          deletedAt: null,
-          user: {
-            deletedAt: null,
-          },
-          OR: [
-            {
-              user: {
-                name: {
-                  contains: query,
-                  // mode: 'insensitive',
-                },
-              },
-            },
-            {
-              user: {
-                email: {
-                  contains: query,
-                  // mode: Prisma.QueryMode.insensitive,
-                },
-              },
-            },
-            {
-              details: {
-                contains: query,
-                // mode: 'insensitive',
-              },
-            },
-            /* {
-              date: {
-                contains: query,
-                // mode: 'insensitive',
-              },
-            }, */
-            {
-              status: {
-                contains: query,
-                // mode: 'insensitive',
-              },
-            },
-          ],
-        },
-        include: {
-          user: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              image_url: true,
-            },
-          },
-        },
-        orderBy: {
-          date: 'desc',
-        },
-        take: ITEMS_PER_PAGE,
-        skip: offset,
-      });
-    } else {
-      tickets = await prisma.ticket.findMany({
-        where: {
-          deletedAt: null,
-          user: {
-            deletedAt: null,
-          },
-        },
-        include: {
-          user: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              image_url: true,
-            },
-          },
-        },
-        orderBy: {
-          date: 'desc',
-        },
-        take: ITEMS_PER_PAGE,
-        skip: offset,
-      });
-    }
+    const tickets = await prisma.ticket.findMany(queryObj1);
 
+    return tickets;
+    
     /* sql<TicketsTable[]>`
       SELECT
         tickets.id,
@@ -260,8 +271,6 @@ export async function fetchFilteredTickets(
       ORDER BY tickets.date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `; */
-
-    return tickets;
   } catch (error) {
     console.error('4Database Error:', error);
     // throw new Error('Failed to fetch tickets.');
@@ -447,7 +456,13 @@ export async function fetchTicketById(id: number) {
         },
         attachments: true,
         category: true, // Include the category if needed
-        assignedToUser: true
+        assignedToUser: {
+          select: {
+            id: true,
+            name: true,
+            role: true
+          }
+        }
       },
     });
 
@@ -622,7 +637,7 @@ export async function fetchCurrentUser() {
 
     const user = await prisma.user.findUnique({
       where: {
-        email: session.user.email ?? undefined,
+        email: session?.user?.email ?? undefined,
         deletedAt: null,
       },
       include: {
@@ -653,17 +668,15 @@ export async function fetchUserMenuLinks() {
     { name: 'Users', href: '/dashboard/users', icon: 'UserGroupIcon' },
   ];
   const currentUser = await fetchCurrentUser();
-  if (currentUser?.role?.id) {
-    switch (currentUser.role.id) {
-      case 3: // Service Technician
-        links.splice(2, 2); // Remove 'Categories' and 'Users'
-        break;
-      case 4: // Student
-        links.splice(1, 3); // Remove 'Tickets', 'Categories', and 'Users'
-        break;
-      default:
-        break;
-    }
+  switch (currentUser?.role?.id) {
+    case 3: // Service Technician
+      links.splice(2, 2); // Remove 'Categories' and 'Users'
+      break;
+    case 4: // Student
+      links.splice(2, 2); // Remove 'Tickets', 'Categories', and 'Users'
+      break;
+    default:
+      break;
   }
   return links;
 }

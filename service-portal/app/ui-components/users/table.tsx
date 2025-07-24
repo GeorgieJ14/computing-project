@@ -34,9 +34,13 @@ export default async function UsersTable({
                               width={28}
                               height={28}
                             />
-                            <p>{user.name}</p>
-                            <p>User-role: {user.role.name}</p>
-                            <p>Category: {user.category?.name ?? '---'}</p>
+                            <p className='text-xl font-medium'>{user.name}</p>
+                            <p className='text-xl font-medium'>
+                              User-role: {user.role.name}
+                            </p>
+                            <p className='text-xl font-medium'>
+                              Category: {user.category?.name ?? '---'}
+                            </p>
                           </div>
                         </div>
                         <p className="text-sm text-gray-500">
@@ -99,7 +103,7 @@ export default async function UsersTable({
                             width={28}
                             height={28}
                           />
-                          <p>{user.name}</p>
+                          <p className='text-xl font-medium'>{user.name}</p>
                         </div>
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">

@@ -35,9 +35,9 @@ export default async function CategoriesTable(/* {
                         height={28}
                         alt={`${category.title}'s picture`}
                       /> */}
-                      <p>{category.name}</p>
+                      <p className='text-xl font-medium'>{category.name}</p>
                     </div>
-                    <p>Users: </p>
+                    <p className='text-xl font-medium'>Users: </p>
                     <ul>
                       {category.users?.map((user) => (
                         <li key={user.id}>
@@ -45,7 +45,7 @@ export default async function CategoriesTable(/* {
                         </li>
                       ))}
                     </ul>
-                    <p>Tickets: </p>
+                    <p className='text-xl font-medium'>Tickets: </p>
                     <ul>
                       {category.tickets?.map((ticket) => (
                         <li key={ticket.id}>
@@ -111,7 +111,7 @@ export default async function CategoriesTable(/* {
                         height={28}
                         alt={`${category.title}'s picture`}
                       /> */}
-                      <p>{category.name}</p>
+                      <p className='text-xl font-medium'>{category.name}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">

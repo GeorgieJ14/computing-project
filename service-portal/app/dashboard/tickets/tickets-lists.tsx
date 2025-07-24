@@ -20,6 +20,7 @@ import { huggingFaceApi } from '@/lib/huggingface';
 
 export default function TicketsLists(props: {
   ticketsList1: typeof prisma.ticket[];
+  currentUser: typeof prisma.user;
   pagination: React.ReactNode;
   createTicket: React.ReactNode;
 }) {
@@ -30,7 +31,7 @@ export default function TicketsLists(props: {
   const totalPages = use(fetchTicketsPages(query));
   const ticketsList1 = use(fetchFilteredTickets(query, currentPage)); */
   const [ticketsList, setTicketsList] = useState(props.ticketsList1);
-  
+  const isAdminUser = [1, 2].includes(props.currentUser?.role?.id);
   const categorizeTickets1 = useCallback(() => {
     const updatedTickets = huggingFaceApi(ticketsList);
     updatedTickets.then((updatedTickets) => {
@@ -46,17 +47,21 @@ export default function TicketsLists(props: {
       <div className="flex w-full items-center justify-between">
         <h1 className={`text-2xl`}>Tickets</h1>
         <Button title="Click to activate A.I."
-          onClick={categorizeTickets1} className='cursor-pointer'
+          onClick={categorizeTickets1}
+          disabled={!isAdminUser}
+          className={`cursor-pointer ${!isAdminUser ? 'hidden' : ''}`}
           /* updatedTickets={handleUpdatedTickets} */ >
           A.I Categorization, Filtering
         </Button>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
         <Search placeholder="Search tickets..." />
-        {/* <CreateTicket /> */} {props.createTicket}
+        {/* <CreateTicket /> */}
+        {(props.currentUser?.role?.id == 4) && props.createTicket}
       </div>
       <Suspense key="ticketsLists1" fallback={<TicketsTableSkeleton />}>
-        <Table tickets={ticketsList} /* query={query} currentPage={currentPage} */ />
+        <Table tickets={ticketsList} /* query={query} currentPage={currentPage} */
+          isAdminUser={isAdminUser}/>
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
         {/* <Pagination totalPages={props.totalPages} /> */}

@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image';
 import { UpdateTicket, DeleteTicket } from '@/app/ui-components/tickets/buttons';
 import TicketStatus from '@/app/ui-components/tickets/status';
@@ -9,11 +11,12 @@ import prisma from '@/lib/database/prisma/prisma';
 export default function TicketsTable({
   /* query,
   currentPage, */
-  tickets
+  tickets, isAdminUser
 }: {
   /* query: string;
   currentPage: number; */
   tickets: typeof prisma.ticket[];
+  isAdminUser: boolean
 }) {
   // const tickets: typeof prisma.ticket[] = await fetchFilteredTickets(query, currentPage);
 
@@ -37,11 +40,19 @@ export default function TicketsTable({
                         height={28}
                         alt={`${ticket.title}'s picture`}
                       />
-                      <p>{ticket.title}</p>
+                      <p className='text-xl font-medium'>{ticket.title}</p>
                     </div>
                     <p className="text-sm text-gray-500">{formatDateToLocal(ticket.date)}</p>
                   </div>
                   <TicketStatus status={ticket.status} />
+                  <p className='text-xl font-medium'>
+                    Category: {ticket.category?.name ?? '---'}
+                  </p>
+                  <p className='text-xl font-medium'>
+                    Assigned-to user: {ticket.assignedToUser ?
+                    ticket.assignedToUser?.name + ' (' +
+                    ticket.assignedToUser?.role?.name + ')' : '---'}
+                  </p>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
@@ -52,7 +63,7 @@ export default function TicketsTable({
                   </div>
                   <div className="flex justify-end gap-2">
                     <UpdateTicket id={ticket.id} />
-                    <DeleteTicket id={ticket.id} />
+                    {isAdminUser && <DeleteTicket id={ticket.id} /> }
                   </div>
                 </div>
               </div>
@@ -66,6 +77,12 @@ export default function TicketsTable({
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Date
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Category
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Assigned-to user
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Details
@@ -96,11 +113,18 @@ export default function TicketsTable({
                         height={28}
                         alt={`${ticket.title}'s picture`}
                       />
-                      <p>{ticket.title}</p>
+                      <p className='text-xl font-medium'>{ticket.title}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {formatDateToLocal(ticket.date)}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {ticket.category?.name ?? '---'}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {ticket.assignedToUser ? ticket.assignedToUser?.name + ' (' +
+                    ticket.assignedToUser?.role?.name + ')' : '---'}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {ticket.details}
@@ -114,7 +138,7 @@ export default function TicketsTable({
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
                       <UpdateTicket id={ticket.id} />
-                      <DeleteTicket id={ticket.id} />
+                      {isAdminUser && <DeleteTicket id={ticket.id} />}
                     </div>
                   </td>
                 </tr>

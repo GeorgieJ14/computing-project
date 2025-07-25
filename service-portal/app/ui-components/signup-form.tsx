@@ -28,7 +28,7 @@ export default function SignUpForm({ roles }: { roles: typeof prisma.role[] }) {
             <div className="relative">
               <input type="text" id="fullName" name="fullName" required
               className="peer block w-full rounded-md border border-gray-200
-              py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500" />
+              py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-800 text-gray-900" />
               <UserIcon className="pointer-events-none absolute left-3 top-1/2
               -translate-y-1/2 h-[18px] w-[18px] text-gray-500 peer-focus:text-gray-900" />
             </div>
@@ -41,7 +41,7 @@ export default function SignUpForm({ roles }: { roles: typeof prisma.role[] }) {
             <div className="relative">
               <input type="email" id="email" name="email" required
               className="peer block w-full rounded-md border border-gray-200
-              py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500" />
+              py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-800 text-gray-900" />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2
               -translate-y-1/2 h-[18px] w-[18px] text-gray-500 peer-focus:text-gray-900" />
             </div>
@@ -54,7 +54,7 @@ export default function SignUpForm({ roles }: { roles: typeof prisma.role[] }) {
             <div className="relative">
               <input type="password" id="password" name="password" required
               className="peer block w-full rounded-md border border-gray-200
-              py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+              py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-800 text-gray-900"
               minLength={6} />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2
               -translate-y-1/2 h-[18px] w-[18px] text-gray-500 peer-focus:text-gray-900" />
@@ -69,7 +69,7 @@ export default function SignUpForm({ roles }: { roles: typeof prisma.role[] }) {
             <div className="relative">
               <select id="userRole" name="userRole" required
               className="peer block w-full rounded-md border border-gray-200
-              py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500">
+              py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-800 text-gray-900">
                 <option value="" disabled>Select your user-role</option>
                 {roles.map((role) => (
                   <option key={role.id} value={role.id}>

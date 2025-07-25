@@ -35,9 +35,9 @@ export default async function CategoriesTable(/* {
                         height={28}
                         alt={`${category.title}'s picture`}
                       /> */}
-                      <p className='text-xl font-medium'>{category.name}</p>
+                      <p className='text-l font-medium'>{category.name}</p>
                     </div>
-                    <p className='text-xl font-medium'>Users: </p>
+                    <p className='text-l font-medium'>Users: </p>
                     <ul>
                       {category.users?.map((user) => (
                         <li key={user.id}>
@@ -45,7 +45,7 @@ export default async function CategoriesTable(/* {
                         </li>
                       ))}
                     </ul>
-                    <p className='text-xl font-medium'>Tickets: </p>
+                    <p className='text-l font-medium'>Tickets: </p>
                     <ul>
                       {category.tickets?.map((ticket) => (
                         <li key={ticket.id}>
@@ -60,7 +60,7 @@ export default async function CategoriesTable(/* {
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
-                    <p className="text-xl font-medium">
+                    <p className="text-l font-medium">
                       {category.description}
                     </p>
                     {/* <p>{formatDateToLocal(category.date)}</p> */}
@@ -111,7 +111,7 @@ export default async function CategoriesTable(/* {
                         height={28}
                         alt={`${category.title}'s picture`}
                       /> */}
-                      <p className='text-xl font-medium'>{category.name}</p>
+                      <p className='text-l font-medium'>{category.name}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">

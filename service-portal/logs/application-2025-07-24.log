@@ -1,0 +1,65 @@
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Ready in 40s","timestamp":"2025-07-23T22:23:56.063Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/categories ...","timestamp":"2025-07-23T22:25:16.731Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/categories in 54s","timestamp":"2025-07-23T22:26:10.236Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/users ...","timestamp":"2025-07-23T22:27:25.837Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/users in 4.2s","timestamp":"2025-07-23T22:27:29.522Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 360.4s","timestamp":"2025-07-23T22:50:10.050Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 13.5s","timestamp":"2025-07-23T22:51:58.717Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 29.6s","timestamp":"2025-07-23T23:01:15.479Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14.5s","timestamp":"2025-07-23T23:17:21.877Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 15.1s","timestamp":"2025-07-23T23:21:51.804Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 15.8s","timestamp":"2025-07-23T23:22:41.969Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/categories ...","timestamp":"2025-07-23T23:24:00.834Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/categories in 1270ms","timestamp":"2025-07-23T23:24:01.590Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14s","timestamp":"2025-07-23T23:26:27.121Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 23.7s","timestamp":"2025-07-23T23:30:56.078Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 16.6s","timestamp":"2025-07-23T23:38:38.847Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 19.2s","timestamp":"2025-07-23T23:39:09.199Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/categories in 215ms","timestamp":"2025-07-23T23:43:45.233Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 103.5s","timestamp":"2025-07-24T00:05:49.791Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 34.4s","timestamp":"2025-07-24T00:07:11.495Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 18s","timestamp":"2025-07-24T00:08:30.400Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14.4s","timestamp":"2025-07-24T00:17:21.641Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 12.6s","timestamp":"2025-07-24T00:19:43.891Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/tickets ...","timestamp":"2025-07-24T00:48:50.490Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 14.7s","timestamp":"2025-07-24T00:49:04.638Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 29.4s","timestamp":"2025-07-24T01:18:21.756Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 16.4s","timestamp":"2025-07-24T01:20:35.000Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 13.9s","timestamp":"2025-07-24T01:21:15.038Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14.1s","timestamp":"2025-07-24T01:45:24.250Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 13.6s","timestamp":"2025-07-24T01:46:25.817Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 29.3s","timestamp":"2025-07-24T01:51:03.811Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 29.9s","timestamp":"2025-07-24T01:51:51.783Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 20.8s","timestamp":"2025-07-24T02:30:30.837Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 18.5s","timestamp":"2025-07-24T04:33:29.495Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 16.2s","timestamp":"2025-07-24T04:54:42.179Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 18s","timestamp":"2025-07-24T05:03:05.604Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 19s","timestamp":"2025-07-24T05:03:33.650Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14s","timestamp":"2025-07-24T05:05:17.611Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/categories in 428ms","timestamp":"2025-07-24T05:32:34.891Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 280ms","timestamp":"2025-07-24T05:33:08.977Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 13.9s","timestamp":"2025-07-24T06:21:17.291Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 29s","timestamp":"2025-07-24T06:21:52.115Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 21.7s","timestamp":"2025-07-24T06:22:57.030Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 22.4s","timestamp":"2025-07-24T06:23:27.953Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14.7s","timestamp":"2025-07-24T06:26:36.724Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 16s","timestamp":"2025-07-24T06:33:46.335Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14.3s","timestamp":"2025-07-24T06:35:15.031Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14.7s","timestamp":"2025-07-24T06:37:02.245Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 18.9s","timestamp":"2025-07-24T06:46:52.075Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 17.1s","timestamp":"2025-07-24T06:47:31.079Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 21.5s","timestamp":"2025-07-24T06:51:20.227Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 18.7s","timestamp":"2025-07-24T06:52:30.771Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 22.7s","timestamp":"2025-07-24T07:30:09.656Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 13.4s","timestamp":"2025-07-24T07:37:41.712Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 13.8s","timestamp":"2025-07-24T07:40:16.961Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 18.3s","timestamp":"2025-07-24T07:43:52.643Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 13.3s","timestamp":"2025-07-24T07:44:17.432Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/tickets ...","timestamp":"2025-07-24T08:16:52.382Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 524ms","timestamp":"2025-07-24T08:16:52.399Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /favicon.ico ...","timestamp":"2025-07-24T08:16:56.989Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /favicon.ico in 2.9s","timestamp":"2025-07-24T08:16:59.359Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard ...","timestamp":"2025-07-24T14:44:44.847Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard in 8.7s","timestamp":"2025-07-24T14:44:52.996Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 22.1s","timestamp":"2025-07-24T14:52:12.595Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard in 187ms","timestamp":"2025-07-24T14:52:20.908Z"}

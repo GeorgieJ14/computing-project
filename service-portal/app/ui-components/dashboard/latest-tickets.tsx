@@ -3,14 +3,17 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { fetchLatestTickets } from '@/lib/data';
 import { formatDateToLocal } from '@/lib/utils';
+import prisma from '@/lib/database/prisma/prisma';
 
-export default async function LatestTickets() {
+export default async function LatestTickets(
+  {currentUser}: {currentUser: typeof prisma.user}
+) {
   const latestTickets = await fetchLatestTickets();
 
   return (
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className="mb-4 text-xl md:text-2xl">
-        Latest Tickets
+        {(currentUser?.role?.id == 4) && "Your"} Latest Tickets
       </h2>
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
         <div className="bg-white px-6">

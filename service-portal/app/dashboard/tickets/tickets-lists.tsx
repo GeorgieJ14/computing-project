@@ -45,7 +45,9 @@ export default function TicketsLists(props: {
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
-        <h1 className={`text-2xl`}>Tickets</h1>
+        <h1 className={`text-2xl`}>
+          {props.currentUser?.role?.id == 4 && "Your"} Tickets
+        </h1>
         <Button title="Click to activate A.I."
           onClick={categorizeTickets1}
           disabled={!isAdminUser}

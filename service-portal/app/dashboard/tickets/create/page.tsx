@@ -1,4 +1,4 @@
-import { fetchUsers } from '@/lib/data';
+import { fetchCurrentUser, fetchUsers } from '@/lib/data';
 import Form from '@/app/ui-components/tickets/create-form';
 import Breadcrumbs from '@/app/ui-components/tickets/breadcrumbs';
 import { Metadata } from 'next';
@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const users = await fetchUsers();
+  const currentUser = await fetchCurrentUser();
 
   return (
     <main>
@@ -22,7 +23,7 @@ export default async function Page() {
           },
         ]}
       />
-      <Form users={users} />
+      <Form users={users} currentUser={currentUser}/>
     </main>
   );
 }

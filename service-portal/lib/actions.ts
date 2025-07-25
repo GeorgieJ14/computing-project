@@ -88,11 +88,11 @@ export async function createTicket(prevState: State, formData: FormData) {
 
   // Prepare data for insertion into the database
   const { userId, title, details, tags, status } = validatedFields.data;
-  const date = new Date().toISOString().split('T')[0];
-  const files = formData.get('attachments');
-  // console.log(files);
+  const date = new Date(); // .toISOString().split('T')[0];
+  const files = formData.getAll('attachments');
+
   const filesArray1 = Array.isArray(files) ? await Promise.all(
-    files.map(async (file1) => {
+    files?.map(async (file1) => {
       const fileObj1 = {
         userId: userId,
         fileName: file1.name.replaceAll(' ', '_'),
@@ -102,14 +102,14 @@ export async function createTicket(prevState: State, formData: FormData) {
       };
       await writeFile(
         path.join(process.cwd(), 'public/file_uploads/ticket_images', fileObj1.fileName),
-        Buffer.from(await file1.arrayBuffer()),
+        Buffer.from(await file1?.arrayBuffer()),
       );
       return fileObj1;
   })) : [];
 
-
   // Insert data into the database
   try {
+    // console.log(files);
     await prisma.ticket.create({
       data: {
         userId: userId,

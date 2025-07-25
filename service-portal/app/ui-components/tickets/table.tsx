@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { UpdateTicket, DeleteTicket } from '@/app/ui-components/tickets/buttons';
 import TicketStatus from '@/app/ui-components/tickets/status';
-import { formatDateToLocal } from '@/lib/utils-client';
+import { formatDateToLocal } from '@/lib/utils';
 // formatCurrency
 // import { fetchFilteredTickets } from '@/lib/data';
 import prisma from '@/lib/database/prisma/prisma';
@@ -40,15 +40,18 @@ export default function TicketsTable({
                         height={28}
                         alt={`${ticket.title}'s picture`}
                       />
-                      <p className='text-xl font-medium'>{ticket.title}</p>
+                      <p className='text-l font-medium'>{ticket.title}</p>
                     </div>
                     <p className="text-sm text-gray-500">{formatDateToLocal(ticket.date)}</p>
                   </div>
                   <TicketStatus status={ticket.status} />
-                  <p className='text-xl font-medium'>
+                  <p className='text-l font-medium'>
                     Category: {ticket.category?.name ?? '---'}
                   </p>
-                  <p className='text-xl font-medium'>
+                  <p className='text-l font-medium'>
+                    Priority: {ticket.priority ?? '---'}
+                  </p>
+                  <p className='text-l font-medium'>
                     Assigned-to user: {ticket.assignedToUser ?
                     ticket.assignedToUser?.name + ' (' +
                     ticket.assignedToUser?.role?.name + ')' : '---'}
@@ -56,7 +59,7 @@ export default function TicketsTable({
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
-                    <p className="text-xl font-medium">
+                    <p className="text-l font-medium">
                       {ticket.details}
                     </p>
                     <p>{formatDateToLocal(ticket.date)}</p>
@@ -80,6 +83,9 @@ export default function TicketsTable({
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Category
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Priority
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Assigned-to user
@@ -113,7 +119,7 @@ export default function TicketsTable({
                         height={28}
                         alt={`${ticket.title}'s picture`}
                       />
-                      <p className='text-xl font-medium'>{ticket.title}</p>
+                      <p className='text-l font-medium'>{ticket.title}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
@@ -123,11 +129,14 @@ export default function TicketsTable({
                     {ticket.category?.name ?? '---'}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
+                    {ticket.priority ?? '---'}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
                     {ticket.assignedToUser ? ticket.assignedToUser?.name + ' (' +
                     ticket.assignedToUser?.role?.name + ')' : '---'}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {ticket.details}
+                    {ticket.details?.slice(0, 25)}{(ticket.details?.length > 25) && "..."}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {ticket.tags}

@@ -9,7 +9,7 @@ const userRoles: typeof prisma.role[] = [
 
 export async function main() {
   for (const role of userRoles) {
-    await prisma.Role.create({
+    await prisma.role.create({
       data: role
     });
   }

@@ -37,40 +37,56 @@ export async function fetchTickets() {
 }
 
 export async function fetchLatestTickets() {
-  try {
-    const data = await prisma.ticket.findMany({
-      where: {
-        deletedAt: null,
-      },
-      orderBy: {
-        date: 'desc',
-      },
-      take: 5,
-      include: {
-        user: {
-          select: {
-            id: true,
-            name: true,
-            image_url: true,
-            email: true,
-          },
+  const currentUser = fetchCurrentUser();
+  let queryObj1 = {
+    where: {
+      deletedAt: null,
+      user: undefined,
+      assignedToUser: undefined
+    },
+    orderBy: {
+      date: Prisma.SortOrder.desc,
+    },
+    take: 5,
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          image_url: true,
+          email: true,
         },
-        attachments: true
       },
-    });
+      attachments: true
+    },
+  };
+
+  switch (currentUser?.role?.id) {
+    case 3:
+      queryObj1.where.assignedToUser = {
+        id: currentUser.id,
+        deletedAt: null
+      }
+      break;
+    case 4:
+      queryObj1.where.user = {
+        id: currentUser.id,
+        deletedAt: null
+      }
+      break;
+    default:
+      break;
+  }
+  try {
+    const data = await prisma.ticket.findMany(queryObj1);
+    return data;
+    
     /* sql<Ticket[]>`
       SELECT tickets.details, users.name, users.image_url, users.email, tickets.id
       FROM tickets
       JOIN users ON tickets.user_id = users.id
       ORDER BY tickets.date DESC
       LIMIT 5`; */
-
-    const latestTickets = data;
-    /* .map((ticket) => ({
-      ...ticket,
-      details: ticket.details,
-    })); */
-    return latestTickets;
   } catch (error) {
     console.error('2Database Error:', error);
     // throw new Error('Failed to fetch the latest tickets.');
@@ -662,7 +678,7 @@ export async function fetchCurrentUser() {
 
 export async function fetchUserMenuLinks() {
   const links = [
-    { name: 'Home', href: '/dashboard', icon: 'HomeIcon' },
+    { name: 'Dashboard', href: '/dashboard', icon: 'HomeIcon' },
     { name: 'Tickets', href: '/dashboard/tickets', icon: 'DocumentDuplicateIcon' },
     { name: 'Categories', href: '/dashboard/categories', icon: 'DocumentDuplicateIcon' },
     { name: 'Users', href: '/dashboard/users', icon: 'UserGroupIcon' },
@@ -671,9 +687,11 @@ export async function fetchUserMenuLinks() {
   switch (currentUser?.role?.id) {
     case 3: // Service Technician
       links.splice(2, 2); // Remove 'Categories' and 'Users'
+      // links.splice(0, 1);
       break;
     case 4: // Student
       links.splice(2, 2); // Remove 'Tickets', 'Categories', and 'Users'
+      // links.splice(0, 1);
       break;
     default:
       break;

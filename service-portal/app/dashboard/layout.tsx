@@ -1,4 +1,12 @@
 import SideNav from '@/app/ui-components/dashboard/sidenav';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | A.I-enabled service-request App",
+    default: "Dashboard"
+  }
+};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

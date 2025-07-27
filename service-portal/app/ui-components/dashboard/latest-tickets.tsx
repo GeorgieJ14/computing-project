@@ -30,14 +30,14 @@ export default async function LatestTickets(
               >
                 <div className="flex items-center">
                   <Image
-                    src={ticket.attachments ? '/' + ticket.attachments[0].fileName : '/file.svg'}
+                    src={ticket.attachments?.length ? '/file_uploads/ticket_images/' + ticket.attachments[0]?.fileName : '/file.svg'}
                     alt={`${ticket.title}'s picture`}
-                    className={`${ticket.attachments ? '' : 'hidden'} mr-4 rounded-full`}
+                    className={`${ticket.attachments?.length ? '' : 'hidden'} mr-4 rounded-full`}
                     width={32}
                     height={32}
                   />
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold md:text-base">
+                    <p className="truncate text-sm font-semibold md:text-base text-gray-900">
                       {ticket.title}
                     </p>
                     <p className="hidden text-sm text-gray-500 sm:block">
@@ -46,7 +46,7 @@ export default async function LatestTickets(
                   </div>
                 </div>
                 <p
-                  className={`truncate text-sm font-medium md:text-base`}
+                  className={`truncate text-sm font-medium md:text-base text-gray-900`}
                 >
                   {ticket.details}
                 </p>

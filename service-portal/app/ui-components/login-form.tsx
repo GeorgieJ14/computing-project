@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation";
 export default function LoginForm() {
   const callbackUrl = useSearchParams().get('callbackUrl') || "/dashboard";
   // new URL(window.location.href);
-  const [errorMessage, formAction, isPending] = useActionState(authenticate, undefined); // Added state management
+  const [errorMessage, formAction, isPending] = useActionState(authenticate, ''); // Added state management
 
   return (
     <form className="space-y-3" action={formAction} >

@@ -325,6 +325,9 @@ export async function authenticate(
     if (error instanceof AdapterError || error instanceof EmailSignInError ||
       error instanceof SignInError || error instanceof Verification || error instanceof Error
     ) {
+      // console.log(error.type, error.cause);
+      revalidatePath('/dashboard');
+      redirect('/dashboard');
       return 'Invalid credentials. Please try again.';
     }
     // console.log('12After switch-case user-error...', error instanceof AuthError ? error.type : 'Unknown type');

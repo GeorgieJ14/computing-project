@@ -114,7 +114,8 @@ export async function fetchCardData() {
     const ticketStatusPromise = prisma.ticket.groupBy({
       by: ['status'],
       _count: {
-        status: true,
+        _all: true
+        // status: true,
       },
       where: {
         status: {
@@ -133,11 +134,11 @@ export async function fetchCardData() {
       userCountPromise,
       ticketStatusPromise,
     ]);
-
+    // console.log(data[2], data[1]);
     const numberOfTickets = Number(data[0] ?? '0');
     const numberOfUsers = Number(data[1] ?? '0');
-    const totalResolvedTickets = Number(data[2][0] ?? '0');
-    const totalPendingTickets = Number(data[2][1] ?? '0');
+    const totalResolvedTickets = Number(data[2][1]?._count?._all ?? '0');
+    const totalPendingTickets = Number(data[2][0]?._count?._all ?? '0');
 
     return {
       numberOfUsers,

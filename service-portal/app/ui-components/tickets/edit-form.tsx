@@ -30,22 +30,23 @@ export default function EditTicketForm({
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* User Name */}
         <div className="mb-4">
-          <label htmlFor="user" className="mb-2 block text-sm font-medium">
+          <label htmlFor="user" className="mb-2 block text-sm font-medium text-gray-900">
             Choose user
           </label>
           <div className="relative">
             <select
               id="user"
               name="userId"
-              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue={ticket.user_id}
+              className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-700 text-gray-900"
+              defaultValue={ticket.user_id} value={ticket.user_id}
               aria-describedby="user-error"
             >
               <option value="" disabled>
                 Select a user
               </option>
               {users.map((user) => (
-                <option key={user.id} value={user.id}>
+                (user.role?.id == 4) && <option key={user.id} value={user.id}
+                  /* selected={user.id == ticket.user_id} */>
                   {user.name}
                 </option>
               ))}
@@ -64,7 +65,7 @@ export default function EditTicketForm({
         </div>
 
         <div className="mb-4">
-          <label htmlFor="title" className="mb-2 block text-sm font-medium">
+          <label htmlFor="title" className="mb-2 block text-sm font-medium text-gray-900">
             Title of request/complaint.
           </label>
           <div className="relative mt-2 rounded-md">
@@ -75,7 +76,7 @@ export default function EditTicketForm({
                 type="text"
                 defaultValue={ticket.title}
                 placeholder="Title of request/complaint."
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-700 text-gray-900"
                 aria-describedby="title-error"
               />
               <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -85,7 +86,7 @@ export default function EditTicketForm({
 
         {/* Ticket Details */}
         <div className="mb-4">
-          <label htmlFor="details" className="mb-2 block text-sm font-medium">
+          <label htmlFor="details" className="mb-2 block text-sm font-medium text-gray-900">
             Enter your request/complaint details
           </label>
           <div className="relative mt-2 rounded-md">
@@ -96,7 +97,7 @@ export default function EditTicketForm({
                 type="text"
                 defaultValue={ticket.details}
                 placeholder="Enter your request/complaint details"
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 text-gray-900"
                 aria-describedby="details-error"
               />
               <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -114,7 +115,7 @@ export default function EditTicketForm({
         </div>
 
         <div className="mb-4">
-          <label htmlFor="tags" className="mb-2 block text-sm font-medium">
+          <label htmlFor="tags" className="mb-2 block text-sm font-medium text-gray-900">
             Enter tags/keywords about your request/complaint.
           </label>
           <div className="relative mt-2 rounded-md">
@@ -125,7 +126,7 @@ export default function EditTicketForm({
                 type="text"
                 defaultValue={ticket.tags}
                 placeholder="Enter tags/keywords about your request/complaint."
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 text-gray-900"
                 aria-describedby="tags-error"
               />
               <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -143,7 +144,7 @@ export default function EditTicketForm({
         </div>
     
         <div className="mb-4">
-          <label htmlFor="date" className="mb-2 block text-sm font-medium">
+          <label htmlFor="date" className="mb-2 block text-sm font-medium text-gray-900">
             Date of ticket/complaint.
           </label>
           <div className="relative mt-2 rounded-md">
@@ -152,7 +153,7 @@ export default function EditTicketForm({
                 id="date"
                 name="date"
                 type="date" defaultValue={ticket.date.toISOString().split('T')[0]}
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 text-gray-900"
                 aria-describedby="date-error"
               />
               <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -161,28 +162,28 @@ export default function EditTicketForm({
         </div>
         
         <div className="mb-4">
-          <label htmlFor="attachments" className="mb-2 block text-sm font-medium">
+          <label htmlFor="attachments" className="mb-2 block text-sm font-medium text-gray-900">
             Upload images related to your request/complaint.
           </label>
           <div className="relative mt-2 rounded-md">
+            {ticket.attachments.map((attachment) => (
+              <div key={attachment.fileName} className="mb-6 flex items-center gap-2">
+                <Image
+                  src={`/file_uploads/ticket_images/${attachment.fileName}`}
+                  alt={attachment.fileName} width={150} height={100}
+                  className="h-12 w-12 rounded-md object-cover"
+                />
+                <span className="text-sm text-gray-600">{attachment.fileName}</span>
+              </div>
+            ))}
             <div className="relative">
-              {ticket.attachments.map((attachment) => (
-                <div key={attachment.fileName} className="mb-2 flex items-center gap-2">
-                  <Image
-                    src={`/file_uploads/ticket_images/${attachment.fileName}`}
-                    alt={attachment.fileName}
-                    className="h-12 w-12 rounded-md object-cover"
-                  />
-                  <span className="text-sm text-gray-600">{attachment.fileName}</span>
-                </div>
-              ))}
               <input
                 id="attachments" disabled
                 name="attachments"
                 type="file"
                 multiple accept='image/*'
                 placeholder="Upload images related to your request/complaint."
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 text-gray-900"
                 aria-describedby="attachments-error"
               />
               <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -201,10 +202,10 @@ export default function EditTicketForm({
 
         {/* Ticket Status */}
         <fieldset>
-          <legend className="mb-2 block text-sm font-medium">
+          <legend className="mb-2 block text-sm font-medium text-gray-900">
             Set the Ticket status
           </legend>
-          <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3">
+          <div className="rounded-md border border-gray-200 bg-white px-[14px] py-3 mb-3">
             <div className="flex gap-4">
               <div className="flex items-center">
                 <input
@@ -251,7 +252,7 @@ export default function EditTicketForm({
         </fieldset>
 
         <div className="mb-4">
-          <label htmlFor="priority" className="mb-2 block text-sm font-medium">
+          <label htmlFor="priority" className="mb-2 block text-sm font-medium text-gray-900">
             Ticket-priority
           </label>
           <div className="relative mt-2 rounded-md">
@@ -262,7 +263,7 @@ export default function EditTicketForm({
         </div>
 
         <div className="mb-4">
-          <label htmlFor="assignedToUser" className="mb-2 block text-sm font-medium">
+          <label htmlFor="assignedToUser" className="mb-2 block text-sm font-medium text-gray-900">
             Assigned to User
           </label>
           <div className="relative mt-2 rounded-md">
@@ -276,7 +277,7 @@ export default function EditTicketForm({
         </div>
 
         <div className="mb-4">
-          <label htmlFor="category" className="mb-2 block text-sm font-medium">
+          <label htmlFor="category" className="mb-2 block text-sm font-medium text-gray-900">
             Category
           </label>
           <div className="relative mt-2 rounded-md">
@@ -296,7 +297,7 @@ export default function EditTicketForm({
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link
-          href="/dashboard/Tickets"
+          href="/dashboard/tickets"
           className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
         >
           Cancel

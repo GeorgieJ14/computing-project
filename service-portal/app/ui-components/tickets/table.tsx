@@ -34,8 +34,8 @@ export default function TicketsTable({
                   <div>
                     <div className="mb-2 flex items-center">
                       <Image
-                        src={ticket.attachments ? '/' + ticket.attachments[0].fileName : '/file.svg'}
-                        className={`${ticket.attachments ? '' : 'hidden'} mr-2 rounded-full`}
+                        src={ticket.attachments?.length ? '/file_uploads/ticket_images/' + ticket.attachments[0]?.fileName : '/file.svg'}
+                        className={`${ticket.attachments?.length ? '' : 'hidden'} mr-2 rounded-full`}
                         width={28}
                         height={28}
                         alt={`${ticket.title}'s picture`}
@@ -113,8 +113,8 @@ export default function TicketsTable({
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
                       <Image
-                        src={ticket.attachments ? '/' + ticket.attachments[0].fileName : '/file.svg'}
-                        className={`${ticket.attachments ? '' : 'hidden'} rounded-full`}
+                        src={ticket.attachments?.length ? '/file_uploads/ticket_images/' + ticket.attachments[0]?.fileName : '/file.svg'}
+                        className={`${ticket.attachments?.length ? '' : 'hidden'} rounded-full`}
                         width={28}
                         height={28}
                         alt={`${ticket.title}'s picture`}

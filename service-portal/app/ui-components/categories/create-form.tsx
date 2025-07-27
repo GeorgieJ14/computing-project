@@ -22,7 +22,7 @@ export default function Form({ users }: { users: typeof prisma.user[] }) {
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Category Name */}
         <div className="mb-4">
-          <label htmlFor="name" className="mb-2 block text-sm font-medium">
+          <label htmlFor="name" className="mb-2 block text-sm font-medium text-gray-900">
             Enter category-name
           </label>
 
@@ -33,7 +33,7 @@ export default function Form({ users }: { users: typeof prisma.user[] }) {
                 name="name"
                 type="text"
                 placeholder="Enter category name"
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-700 text-gray-900"
                 aria-describedby="name-error"
               />
               <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -51,7 +51,7 @@ export default function Form({ users }: { users: typeof prisma.user[] }) {
 
         {/* Category Details */}
         <div className="mb-4">
-          <label htmlFor="description" className="mb-2 block text-sm font-medium">
+          <label htmlFor="description" className="mb-2 block text-sm font-medium text-gray-900">
             Enter your request/complaint description
           </label>
           <div className="relative mt-2 rounded-md">
@@ -61,7 +61,7 @@ export default function Form({ users }: { users: typeof prisma.user[] }) {
                 name="description"
                 type="text"
                 placeholder="Enter your request/complaint description"
-                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 text-gray-900"
                 aria-describedby="description-error"
               />
               <DocumentTextIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -79,7 +79,7 @@ export default function Form({ users }: { users: typeof prisma.user[] }) {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="users" className="mb-2 block text-sm font-medium">
+          <label htmlFor="users" className="mb-2 block text-sm font-medium text-gray-900">
             Select users
           </label>
           <div className="relative mt-2 rounded-md">
@@ -87,7 +87,7 @@ export default function Form({ users }: { users: typeof prisma.user[] }) {
               <select
                 id="users" multiple
                 name="users"
-                className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500 text-gray-900"
                 defaultValue={[]}
                 aria-describedby="user-error"
               >

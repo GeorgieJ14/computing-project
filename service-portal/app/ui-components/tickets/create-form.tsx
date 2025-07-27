@@ -41,10 +41,10 @@ export default function Form({ users, currentUser }: {
                 Select a user
               </option>
               {users.map((user) => (
-                <option key={user.id} value={user.id}
-                  disabled={user.id != currentUser?.id}>
+                ((user.id == currentUser?.id) && <option key={user.id} value={user.id}
+                  /* disabled={user.id != currentUser?.id} */>
                   {user.name}
-                </option>
+                </option>)
               ))}
             </select>
             <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />

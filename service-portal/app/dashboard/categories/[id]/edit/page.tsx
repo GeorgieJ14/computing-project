@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   title: 'Edit Category',
 };
 
-export default async function Page(props: { params: Promise<{ id: number }> }) {
+export default async function Page(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
-  const id = params.id;
+  const id = Number(params.id);
   const [category, users] = await Promise.all([
     fetchCategoryById(id),
     fetchUsers(),

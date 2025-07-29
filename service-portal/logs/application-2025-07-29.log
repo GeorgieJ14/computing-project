@@ -1,0 +1,138 @@
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 17.6s","timestamp":"2025-07-29T00:20:10.237Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 12.5s","timestamp":"2025-07-29T00:22:49.514Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 17.9s","timestamp":"2025-07-29T00:51:19.275Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 27.6s","timestamp":"2025-07-29T00:54:29.585Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 22.4s","timestamp":"2025-07-29T00:58:07.198Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14.9s","timestamp":"2025-07-29T01:03:35.164Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 13.8s","timestamp":"2025-07-29T01:04:42.933Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 21.2s","timestamp":"2025-07-29T01:05:06.907Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 15.2s","timestamp":"2025-07-29T01:06:54.391Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 37.4s","timestamp":"2025-07-29T01:12:10.059Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 24.8s","timestamp":"2025-07-29T01:13:28.609Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 16.8s","timestamp":"2025-07-29T01:31:54.224Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 25.6s","timestamp":"2025-07-29T01:33:39.755Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 17.8s","timestamp":"2025-07-29T01:37:49.278Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 18.5s","timestamp":"2025-07-29T01:54:32.612Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 17.8s","timestamp":"2025-07-29T01:55:49.701Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14s","timestamp":"2025-07-29T01:58:39.818Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14.8s","timestamp":"2025-07-29T01:59:04.284Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 20.4s","timestamp":"2025-07-29T02:00:11.416Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 12.8s","timestamp":"2025-07-29T02:01:29.281Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 25.5s","timestamp":"2025-07-29T02:02:19.899Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 27.3s","timestamp":"2025-07-29T02:05:21.199Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 57.1s","timestamp":"2025-07-29T02:16:00.991Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 21.1s","timestamp":"2025-07-29T02:27:22.903Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 19s","timestamp":"2025-07-29T02:28:45.469Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 15.7s","timestamp":"2025-07-29T02:30:37.548Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/tickets ...","timestamp":"2025-07-29T02:43:17.015Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 1483ms","timestamp":"2025-07-29T02:43:17.991Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 27.1s","timestamp":"2025-07-29T02:57:16.585Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/tickets ...","timestamp":"2025-07-29T02:57:18.238Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 815ms","timestamp":"2025-07-29T02:57:18.549Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 26.3s","timestamp":"2025-07-29T02:58:40.669Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 247ms","timestamp":"2025-07-29T02:58:40.967Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 13.7s","timestamp":"2025-07-29T03:01:01.109Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 195ms","timestamp":"2025-07-29T03:01:01.368Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 16.6s","timestamp":"2025-07-29T03:01:32.275Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 17s","timestamp":"2025-07-29T03:01:55.204Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 181ms","timestamp":"2025-07-29T03:01:55.428Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 16.2s","timestamp":"2025-07-29T03:02:46.266Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 205ms","timestamp":"2025-07-29T03:02:46.480Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 57.9s","timestamp":"2025-07-29T03:11:53.821Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 12.1s","timestamp":"2025-07-29T03:20:46.041Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 9.7s","timestamp":"2025-07-29T03:21:32.689Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/tickets ...","timestamp":"2025-07-29T03:25:20.756Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 645ms","timestamp":"2025-07-29T03:25:20.892Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 21.1s","timestamp":"2025-07-29T03:28:56.970Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 275ms","timestamp":"2025-07-29T03:28:57.572Z"}
+{"level":"http","message":[{"box":{"xmax":1300,"xmin":968,"ymax":701,"ymin":338},"label":"stop sign","score":0.7908186316490173},{"box":{"xmax":333,"xmin":0,"ymax":699,"ymin":287},"label":"stop sign","score":0.5337512493133545}],"timestamp":"2025-07-29T03:29:07.705Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 21.3s","timestamp":"2025-07-29T03:30:06.624Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 244ms","timestamp":"2025-07-29T03:30:06.805Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/tickets ...","timestamp":"2025-07-29T03:33:40.226Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 20s","timestamp":"2025-07-29T03:33:40.309Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 817ms","timestamp":"2025-07-29T03:33:40.538Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 17.7s","timestamp":"2025-07-29T03:36:31.101Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 217ms","timestamp":"2025-07-29T03:36:31.325Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 18.2s","timestamp":"2025-07-29T03:39:40.888Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 229ms","timestamp":"2025-07-29T03:39:41.167Z"}
+{"level":"http","message":"Defaulting to 'auto' which will select the first provider available for the model, sorted by the user's order in https://hf.co/settings/inference-providers.","timestamp":"2025-07-29T03:42:00.806Z"}
+{"level":"http","message":"Defaulting to 'auto' which will select the first provider available for the model, sorted by the user's order in https://hf.co/settings/inference-providers.","timestamp":"2025-07-29T03:42:00.859Z"}
+{"level":"http","message":"Auto selected provider:","timestamp":"2025-07-29T03:42:01.159Z"}
+{"level":"http","message":"Auto selected provider:","timestamp":"2025-07-29T03:42:01.404Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/categories ...","timestamp":"2025-07-29T03:46:18.585Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/categories in 35.3s","timestamp":"2025-07-29T03:46:53.406Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 20.7s","timestamp":"2025-07-29T03:50:41.565Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 19.3s","timestamp":"2025-07-29T03:54:03.435Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/tickets ...","timestamp":"2025-07-29T03:56:32.785Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 1331ms","timestamp":"2025-07-29T03:56:33.599Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 20.8s","timestamp":"2025-07-29T04:12:43.445Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 215ms","timestamp":"2025-07-29T04:12:43.729Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 15s","timestamp":"2025-07-29T04:17:13.209Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 230ms","timestamp":"2025-07-29T04:17:13.512Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 13.8s","timestamp":"2025-07-29T04:18:06.777Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 245ms","timestamp":"2025-07-29T04:18:07.170Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 20.8s","timestamp":"2025-07-29T04:18:59.226Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 240ms","timestamp":"2025-07-29T04:18:59.541Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 38.5s","timestamp":"2025-07-29T04:19:39.581Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 155ms","timestamp":"2025-07-29T04:19:39.769Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 25.9s","timestamp":"2025-07-29T04:24:09.520Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 469ms","timestamp":"2025-07-29T04:24:10.161Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 35.8s","timestamp":"2025-07-29T04:26:19.469Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 319ms","timestamp":"2025-07-29T04:26:19.982Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 14.8s","timestamp":"2025-07-29T04:26:42.177Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 227ms","timestamp":"2025-07-29T04:26:42.503Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 16.8s","timestamp":"2025-07-29T04:30:37.784Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 265ms","timestamp":"2025-07-29T04:30:38.189Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 22.7s","timestamp":"2025-07-29T04:32:03.882Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 257ms","timestamp":"2025-07-29T04:32:04.315Z"}
+{"level":"http","message":[{"model":"mshenoda/roberta-spam","prompt":"Service-request title: new test complaint-ticket1\nService-request description: asdfsadf testing text1\nService-request keywords: washing-machine damaged","response":"Label: LABEL_0, Score: 0.9999487400054932, Label: LABEL_1, Score: 0.000051303817599546164","ticketId":2}],"timestamp":"2025-07-29T04:36:15.526Z"}
+{"level":"http","message":[{"model":"mshenoda/roberta-spam","prompt":"Service-request title: new test complaint-ticket1\nService-request description: asdfsadf testing text1\nService-request keywords: washing-machine damaged","response":"Label: LABEL_0, Score: 0.9999977350234985, Label: LABEL_1, Score: 0.000002280225771755795","ticketId":1}],"timestamp":"2025-07-29T04:36:15.615Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 32.2s","timestamp":"2025-07-29T04:54:15.701Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/tickets ...","timestamp":"2025-07-29T04:54:16.349Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 732ms","timestamp":"2025-07-29T04:54:16.579Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 11.1s","timestamp":"2025-07-29T04:54:33.628Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 242ms","timestamp":"2025-07-29T04:54:33.938Z"}
+{"level":"http","message":[{"model":"mshenoda/roberta-spam","prompt":"Service-request title: new test complaint-ticket1\nService-request description: asdfsadf testing text1\nService-request keywords: washing-machine damaged","response":"Label: LABEL_0, Score: 0.9999977350234985, Label: LABEL_1, Score: 0.000002280225771755795","ticketId":1}],"timestamp":"2025-07-29T04:56:04.365Z"}
+{"level":"http","message":[{"model":"mshenoda/roberta-spam","prompt":"Service-request title: new test complaint-ticket1\nService-request description: asdfsadf testing text1\nService-request keywords: washing-machine damaged","response":"Label: LABEL_0, Score: 0.9999487400054932, Label: LABEL_1, Score: 0.000051303817599546164","ticketId":2},{"model":"facebook/detr-resnet-101","prompt":"zoho.png","response":"Object: stop sign, Score: 0.7908186316490173, Object: stop sign, Score: 0.5337512493133545, ","ticketId":2}],"timestamp":"2025-07-29T04:56:05.973Z"}
+{"level":"http","message":[{"model":"mshenoda/roberta-spam","prompt":"Service-request title: new test complaint-ticket1\nService-request description: asdfsadf testing text1\nService-request keywords: washing-machine damaged","response":"Label: LABEL_0, Score: 0.9999977350234985, Label: LABEL_1, Score: 0.000002280225771755795","ticketId":1}],"timestamp":"2025-07-29T04:57:30.940Z"}
+{"level":"http","message":[{"model":"mshenoda/roberta-spam","prompt":"Service-request title: new test complaint-ticket1\nService-request description: asdfsadf testing text1\nService-request keywords: washing-machine damaged","response":"Label: LABEL_0, Score: 0.9999487400054932, Label: LABEL_1, Score: 0.000051303817599546164","ticketId":2},{"model":"facebook/detr-resnet-101","prompt":"zoho.png","response":"Object: stop sign, Score: 0.7908186316490173, Object: stop sign, Score: 0.5337512493133545, ","ticketId":2}],"timestamp":"2025-07-29T04:57:31.796Z"}
+{"level":"http","message":" \u001b[37m\u001b[1m○\u001b[22m\u001b[39m Compiling /dashboard/categories/create ...","timestamp":"2025-07-29T05:02:25.584Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/categories/create in 7s","timestamp":"2025-07-29T05:02:32.108Z"}
+{"level":"http","message":"Defaulting to 'auto' which will select the first provider available for the model, sorted by the user's order in https://hf.co/settings/inference-providers.","timestamp":"2025-07-29T05:04:13.427Z"}
+{"level":"http","message":"Auto selected provider:","timestamp":"2025-07-29T05:04:13.832Z"}
+{"level":"http","message":"Defaulting to 'auto' which will select the first provider available for the model, sorted by the user's order in https://hf.co/settings/inference-providers.","timestamp":"2025-07-29T05:04:14.262Z"}
+{"level":"http","message":"Auto selected provider:","timestamp":"2025-07-29T05:04:14.263Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 16.9s","timestamp":"2025-07-29T05:10:41.928Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 221ms","timestamp":"2025-07-29T05:10:42.236Z"}
+{"level":"http","message":"Defaulting to 'auto' which will select the first provider available for the model, sorted by the user's order in https://hf.co/settings/inference-providers.","timestamp":"2025-07-29T05:10:51.925Z"}
+{"level":"http","message":"Auto selected provider:","timestamp":"2025-07-29T05:10:52.207Z"}
+{"level":"http","message":"empty","timestamp":"2025-07-29T05:10:52.691Z"}
+{"level":"http","message":"Defaulting to 'auto' which will select the first provider available for the model, sorted by the user's order in https://hf.co/settings/inference-providers.","timestamp":"2025-07-29T05:10:52.993Z"}
+{"level":"http","message":"Auto selected provider:","timestamp":"2025-07-29T05:10:52.995Z"}
+{"level":"http","message":"empty","timestamp":"2025-07-29T05:10:53.430Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 13.4s","timestamp":"2025-07-29T05:17:35.694Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 216ms","timestamp":"2025-07-29T05:17:36.004Z"}
+{"level":"http","message":"Defaulting to 'auto' which will select the first provider available for the model, sorted by the user's order in https://hf.co/settings/inference-providers.","timestamp":"2025-07-29T05:18:22.029Z"}
+{"level":"http","message":"Auto selected provider:","timestamp":"2025-07-29T05:18:22.311Z"}
+{"level":"http","message":"Defaulting to 'auto' which will select the first provider available for the model, sorted by the user's order in https://hf.co/settings/inference-providers.","timestamp":"2025-07-29T05:18:23.025Z"}
+{"level":"http","message":"Auto selected provider:","timestamp":"2025-07-29T05:18:23.050Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 27.6s","timestamp":"2025-07-29T05:24:17.514Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 348ms","timestamp":"2025-07-29T05:24:18.089Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 24.5s","timestamp":"2025-07-29T05:34:33.710Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 223ms","timestamp":"2025-07-29T05:34:34.064Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 37.8s","timestamp":"2025-07-29T05:35:42.906Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 303ms","timestamp":"2025-07-29T05:35:43.421Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 20.4s","timestamp":"2025-07-29T05:40:31.151Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 314ms","timestamp":"2025-07-29T05:40:31.611Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 25.8s","timestamp":"2025-07-29T05:42:19.860Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 483ms","timestamp":"2025-07-29T05:42:20.028Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 30.9s","timestamp":"2025-07-29T05:43:10.569Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 220ms","timestamp":"2025-07-29T05:43:10.891Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 18.1s","timestamp":"2025-07-29T05:44:08.162Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 236ms","timestamp":"2025-07-29T05:44:08.513Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 17.4s","timestamp":"2025-07-29T05:44:41.607Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 427ms","timestamp":"2025-07-29T05:44:42.160Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled in 17.4s","timestamp":"2025-07-29T05:45:11.323Z"}
+{"level":"http","message":" \u001b[32m\u001b[1m✓\u001b[22m\u001b[39m Compiled /dashboard/tickets in 478ms","timestamp":"2025-07-29T05:45:11.909Z"}
+{"level":"http","message":"Defaulting to 'auto' which will select the first provider available for the model, sorted by the user's order in https://hf.co/settings/inference-providers.","timestamp":"2025-07-29T05:53:06.546Z"}
+{"level":"http","message":"Auto selected provider:","timestamp":"2025-07-29T05:53:06.802Z"}

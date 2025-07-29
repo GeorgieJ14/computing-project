@@ -1,0 +1,13 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/dashboard/(overview)/page": "app/dashboard/(overview)/page.js",
+  "/dashboard/categories/[id]/edit/page": "app/dashboard/categories/[id]/edit/page.js",
+  "/dashboard/tickets/[id]/edit/page": "app/dashboard/tickets/[id]/edit/page.js",
+  "/dashboard/categories/create/page": "app/dashboard/categories/create/page.js",
+  "/dashboard/users/page": "app/dashboard/users/page.js",
+  "/dashboard/tickets/create/page": "app/dashboard/tickets/create/page.js",
+  "/dashboard/categories/page": "app/dashboard/categories/page.js",
+  "/dashboard/tickets/page": "app/dashboard/tickets/page.js"
+}

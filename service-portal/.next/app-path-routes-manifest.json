@@ -1,0 +1,13 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/dashboard/(overview)/page": "/dashboard",
+  "/dashboard/categories/[id]/edit/page": "/dashboard/categories/[id]/edit",
+  "/dashboard/tickets/[id]/edit/page": "/dashboard/tickets/[id]/edit",
+  "/dashboard/categories/create/page": "/dashboard/categories/create",
+  "/dashboard/users/page": "/dashboard/users",
+  "/dashboard/tickets/create/page": "/dashboard/tickets/create",
+  "/dashboard/categories/page": "/dashboard/categories",
+  "/dashboard/tickets/page": "/dashboard/tickets"
+}

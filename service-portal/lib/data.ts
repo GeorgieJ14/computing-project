@@ -37,7 +37,7 @@ export async function fetchTickets() {
 }
 
 export async function fetchLatestTickets() {
-  const currentUser = fetchCurrentUser();
+  const currentUser = await fetchCurrentUser();
   let queryObj1 = {
     where: {
       deletedAt: null,
@@ -169,8 +169,8 @@ export async function fetchFilteredTickets(
   currentPage: number,
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentUser = fetchCurrentUser();
-
+  const currentUser = await fetchCurrentUser();
+  
   let queryObj1 = {
     /* select: undefined,
     omit: undefined, */
@@ -211,6 +211,8 @@ export async function fetchFilteredTickets(
   
   switch (currentUser?.role?.id) {
     case 3:
+      // console.log(await currentUser);//, queryObj1);
+      // return [];
       queryObj1.where.assignedToUser = {
         id: currentUser.id
       }

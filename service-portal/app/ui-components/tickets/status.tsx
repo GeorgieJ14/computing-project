@@ -12,18 +12,20 @@ export default function TicketStatus({ status }: { status: string }) {
         },
       )}
     >
-      {status === 'pending' ? (
+      {status == 'pending' ? (
         <>
           Pending
           <ClockIcon className="ml-1 w-4 text-gray-500" />
         </>
-      ) : null}
-      {status === 'resolved' ? (
+      ) : status == 'resolved' ? (
         <>
           Resolved
           <CheckIcon className="ml-1 w-4 text-white" />
         </>
-      ) : null}
+      ) : <>
+          {status}
+          <ClockIcon className="ml-1 w-4 text-gray-500" />
+        </>}
     </span>
   );
 }

@@ -23,6 +23,8 @@ export default function TicketsLists(props: {
   currentUser: typeof prisma.user;
   pagination: React.ReactNode;
   createTicket: React.ReactNode;
+  query: string;
+  currentPage: number;
 }) {
   /* const searchParams = use(props.searchParams);
   const query = searchParams?.query || '';
@@ -33,11 +35,16 @@ export default function TicketsLists(props: {
   const [ticketsList, setTicketsList] = useState(props.ticketsList1);
   const isAdminUser = [1, 2].includes(props.currentUser?.role?.id);
   const categorizeTickets1 = useCallback(() => {
-    const updatedTickets = huggingFaceApi(ticketsList);
-    updatedTickets.then((updatedTickets) => {
-      console.log(updatedTickets, "test-message123");
-      setTicketsList(updatedTickets);
-    })
+    const updatedResp = huggingFaceApi(ticketsList, props.query,
+      props.currentPage);
+    updatedResp.then((updatedResp) => {
+      // console.log(updatedTickets, "test-message123");
+      const updatedTicketsList = updatedResp.updatedTickets;
+      setTicketsList(updatedTicketsList);
+      alert(updatedResp.updatedCount + " tickets updated and categorised.  " +
+        updatedResp.spamTickets + " spam-tickets detected.   " +
+        updatedResp.ticketsAssigned + " tickets assigned to service-personnel.");
+    });
   }, []);
 
   //  useEffect(categorizeTickets1, [categorizeTickets1]);

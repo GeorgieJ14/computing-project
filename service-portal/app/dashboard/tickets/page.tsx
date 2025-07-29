@@ -24,7 +24,7 @@ export default async function Page(props: {
 
   return (
     <TicketsLists ticketsList1={ticketsList1}
-      currentUser={currentUser}
+      currentUser={currentUser} query={query} currentPage={currentPage}
       pagination={<Pagination totalPages={totalPages} />}
       createTicket={<CreateTicket />} />
   );

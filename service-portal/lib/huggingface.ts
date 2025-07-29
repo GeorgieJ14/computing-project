@@ -48,8 +48,16 @@ export async function huggingFaceApi(
     }
   });
 
+  let updatedCount = 0;
+  let spamTickets = 0;
+  let ticketsAssigned = 0;
   if (!newTickets1 || !newTickets1.length) {
-    return tickets;
+    return {
+      updatedTickets: tickets,
+      // await fetchFilteredTickets(query, currentPage),
+      updatedCount: updatedCount, spamTickets: spamTickets,
+      ticketsAssigned: ticketsAssigned
+    };
   }
   const spamCatg1 = await prisma.category.findFirst({
     where: {
@@ -75,9 +83,6 @@ export async function huggingFaceApi(
       name: true
     }, */
   }});
-  let updatedCount = 0;
-  let spamTickets = 0;
-  let ticketsAssigned = 0;
   if (!categories.length) {
     return {
       updatedTickets: tickets,
@@ -87,7 +92,7 @@ export async function huggingFaceApi(
     };
   }
 
-  newTickets1.forEach(async (ticket) => {
+  for (const ticket of newTickets1) {
     const ticketText = "Service-request title: " + ticket.title +
     "\nService-request description: " + ticket.details +
     "\nService-request keywords: " + ticket.tags;
@@ -125,7 +130,7 @@ export async function huggingFaceApi(
       spamTickets++;
       updatedCount++;
 
-      return;
+      continue;
       /* await prisma.huggingFaceAPI.createMany({
         data: responsesList/* {
           model: chatInput1.model,
@@ -151,20 +156,20 @@ export async function huggingFaceApi(
         "public/file_uploads/ticket_images/" + image1.fileName)],
         {type: image1.contentType});
       if (!objectDetectInput.inputs) {
-        return;
+        continue;
       }
       // Image object-detection M.L-model
       const response2 = await client.objectDetection(objectDetectInput);
       // console.log(response2);
       let objectsString1 = "";
-      response2.forEach((response) => {
+      for (const response of response2) {
         objectsString1 += "Object: " + response.label + ", Score: " +
           response.score + ", ";
         if (ticket.title?.includes(response.label) ||
           ticket.tags?.includes(response.label)) {
           objectsDetected.push(response.label);
         }
-      });
+      };
       responsesList.push({
         model: objectDetectInput.model,
         prompt: image1.fileName,
@@ -174,12 +179,12 @@ export async function huggingFaceApi(
       
     };
     if (categories.length < 2) {
-      console.log(responsesList);
+      // console.log(responsesList);
       // Ticket not categorised.
       await prisma.huggingFaceAPI.createMany({
         data: responsesList
       });
-      return;
+      continue;
     }
     
     chatInput1.messages[0].content = ticketText;
@@ -190,9 +195,9 @@ export async function huggingFaceApi(
   
     chatInput1.messages[0].content +=
       "\nPlease choose the most relevant category for the above service-request, from the following category-labels : ";
-    categories.forEach((category) => {
+    for (const category of categories) {
       chatInput1.messages[0].content += category.name + ", ";
-    });
+    };
     chatInput1.messages[0].content += "\nPlease respond only with the chosen category-label text. Don't give any explanation."
     // A.I chat-bot L.L.M api
     const response3 = await client.chatCompletion(chatInput1);
@@ -204,17 +209,22 @@ export async function huggingFaceApi(
         '500 api-response server-error',
       ticketId: ticket.id
     });
-    const ticketCatg1 = categories.find((category) => {
-      category.name.includes(response3?.choices[0]?.message?.content ??
-        '500 api-response server-error')
-    });
+    let ticketCatg1; //= categories.find((category) => {
+    for (const category1 of categories) {
+      if (category1.name.includes(response3?.choices[0]?.message?.content ??
+        '500 api-response server-error')) {
+        ticketCatg1 = category1;
+        break;
+      }
+    };
 
     if (!ticketCatg1) {
+      // console.log(ticketCatg1 ?? "empty");
       // Ticket not categorised.
       await prisma.huggingFaceAPI.createMany({
         data: responsesList
       });
-      return;
+      continue;
     }
 
     await prisma.aIModelPrediction.create({
@@ -270,7 +280,7 @@ export async function huggingFaceApi(
         console.error("Unexpected error:", error);
       }
     } */
-  });
+  };
   return await {
     updatedTickets: await fetchFilteredTickets(query, currentPage),
     updatedCount: updatedCount, spamTickets: spamTickets,

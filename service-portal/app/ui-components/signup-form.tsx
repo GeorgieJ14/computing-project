@@ -35,11 +35,11 @@ export default function SignUpForm({ roles }: { roles: typeof prisma.role[] }) {
           </div>
           <div>
             <label className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-            htmlFor="email">
+            htmlFor="regEmail">
               Email address
             </label>
             <div className="relative">
-              <input type="email" id="email" name="email" required
+              <input type="email" id="regEmail" name="regEmail" required
               className="peer block w-full rounded-md border border-gray-200
               py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-800 text-gray-900" />
               <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2
@@ -48,11 +48,11 @@ export default function SignUpForm({ roles }: { roles: typeof prisma.role[] }) {
           </div>
           <div className="mt-4">
             <label className="mb-3 mt-5 block text-xs font-medium text-gray-900"
-            htmlFor="password">
+            htmlFor="regPassword">
               Password
             </label>
             <div className="relative">
-              <input type="password" id="password" name="password" required
+              <input type="password" id="regPassword" name="regPassword" required
               className="peer block w-full rounded-md border border-gray-200
               py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-800 text-gray-900"
               minLength={6} />

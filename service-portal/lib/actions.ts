@@ -357,8 +357,8 @@ export async function registerUser(
     await prisma.user.create({
       data: {
         name: formData.get('fullName') as string,
-        email: formData.get('email') as string,
-        password: await bcrypt.hash(formData.get('password') as string, 10),
+        email: formData.get('regEmail') as string,
+        password: await bcrypt.hash(formData.get('regPassword') as string, 10),
         roleId: parseInt(formData.get('userRole') as string),
       },
     });
@@ -368,6 +368,8 @@ export async function registerUser(
     }
     return 'Failed to register user.';
   }
+  formData.set('email', formData.get('regEmail') as string);
+  formData.set('password', formData.get('regPassword') as string);
   await authenticate(prevState, formData);
   // revalidatePath('/dashboard');
   // redirect('/dashboard');

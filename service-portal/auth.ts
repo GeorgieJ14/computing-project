@@ -25,7 +25,7 @@ async function getUser(email: string): Promise<typeof prisma.user | undefined> {
   }
 }
 
-export const { auth, signIn, signOut } = NextAuth({
+export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
     Credentials({
@@ -34,7 +34,8 @@ export const { auth, signIn, signOut } = NextAuth({
         email: { label: "E-mail", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, request) {
+        console.log('reached here now 123');
         const parsedCredentials = z
           .object({ 
             email: z.string(), // .email(),
@@ -44,7 +45,6 @@ export const { auth, signIn, signOut } = NextAuth({
         console.log('Parsed credentials:', parsedCredentials);
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
-          console.log('reached here now 123');
           const user = await getUser(email);
           console.log('did reach here 456');
           if (!user) return null;

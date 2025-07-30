@@ -26,36 +26,36 @@ async function getUser(email: string): Promise<typeof prisma.user | undefined> {
 }
 const authConfigVals = authConfig;
 
-authConfigVals.providers.push(
+authConfigVals.providers = [
   Credentials({
     credentials: {
       // username: { label: "Username" },
       email: { label: "E-mail", type: "email" },
       password: { label: "Password", type: "password" },
     },
-    authorize: async (credentials, request) => {
-      console.log('reached here now 123');
+    async authorize (credentials, request) {
+      // console.log('reached here now 123');
       const parsedCredentials = z
         .object({ 
           email: z.string(), // .email(),
           password: z.string().min(6) 
         }).safeParse(credentials);
   
-      console.log('Parsed credentials:', parsedCredentials);
+      // console.log('Parsed credentials:', parsedCredentials);
       if (parsedCredentials.success) {
         const { email, password } = parsedCredentials.data;
         const user = await getUser(email);
-        console.log('did reach here 456');
+        // console.log('did reach here 456');
         if (!user) return null;
-        console.log('reached here 7890') // user.email, user.password);
         const passwordsMatch = await bcrypt.compare(password, user.password);
         if (passwordsMatch) return user;
+        // console.log('reached here 7890') // user.email, user.password);
       }
   
-      console.log('Invalid credentials. Hashes don\'t match.');
+      // console.log('Invalid credentials. Hashes don\'t match.');
       return null;
     },
   }),
-);
-
+];
+// console.log(authConfigVals);
 export const { handlers, auth, signIn, signOut } = NextAuth(authConfigVals);

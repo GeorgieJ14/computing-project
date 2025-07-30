@@ -322,24 +322,26 @@ export async function authenticate(
           return 'Something went wrong.';
       }
     }
-    if (error instanceof AdapterError) {
-      console.log("AdapterError1 ", error.message);
+    /* if (error instanceof AdapterError) {
+      // console.log("AdapterError1 ", error.message);
     } else if (error instanceof EmailSignInError) {
-      console.log("EmailSignInError1 ", error.message);
+      // console.log("EmailSignInError1 ", error.message);
     } else if (error instanceof SignInError) {
-      console.log("SignInError1 ", error.message);
+      // console.log("SignInError1 ", error.message);
     } else if (error instanceof Verification) {
-      console.log("Verification1 ", error.message);
-    } else if (error instanceof Error) {
-      console.log(error.type);
-      console.log(error.cause);
-      console.log("Error1 ", error.message);
+      // console.log("Verification1 ", error.message); */
+    if (error instanceof Error) {
+      if (error.message == "NEXT_REDIRECT") {
+        redirect('/dashboard');
+      }
+
+      // console.log(error.type);
+      console.log("Error1", error.cause);
       // revalidatePath('/dashboard');
-      // redirect('/dashboard');
       return 'Invalid credentials. Please try again.';
     }
 
-    console.log('12After switch-case user-error...', error instanceof AuthError ? error.type : 'Unknown type');
+    // console.log('12After switch-case user-error...', error instanceof AuthError ? error.type : 'Unknown type');
     throw error;
   }
 }

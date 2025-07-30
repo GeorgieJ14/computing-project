@@ -41,8 +41,8 @@ export default function TicketsLists(props: {
       // console.log(updatedTickets, "test-message123");
       const updatedTicketsList = updatedResp.updatedTickets;
       setTicketsList(updatedTicketsList);
-      alert(updatedResp.updatedCount + " tickets updated and categorised.  " +
-        updatedResp.spamTickets + " spam-tickets detected.   " +
+      alert(updatedResp.updatedCount + " tickets updated and categorised. \n\n " +
+        updatedResp.spamTickets + " spam-tickets detected. \n\n " +
         updatedResp.ticketsAssigned + " tickets assigned to service-personnel.");
     });
   }, []);

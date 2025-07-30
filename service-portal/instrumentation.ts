@@ -1,5 +1,5 @@
 export async function register() {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
+  // if (process.env.NEXT_RUNTIME === 'nodejs') {
 
     // await import('winston');
     // await import("next-logger/presets/next-only");
@@ -9,5 +9,5 @@ export async function register() {
     console.info = (msg, ...args) => logger.default.info(msg, ...args);
     console.log = (msg, ...args) => logger.default.http(msg, ...args);
     console.debug = (msg, ...args) => logger.default.debug(msg, ...args);
-  }
+  // }
 }

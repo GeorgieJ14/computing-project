@@ -34,7 +34,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         email: { label: "E-mail", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, request) {
+      authorize: async (credentials, request) => {
         console.log('reached here now 123');
         const parsedCredentials = z
           .object({ 

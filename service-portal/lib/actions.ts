@@ -306,12 +306,12 @@ export async function authenticate(
   formData: FormData,
 ) {
   try {
+    console.log(formData, 'here-moreinfo');//, error instanceof (Error) ? error.cause + ' -here-123- ' + error.message : 'Unknown error');
     await signIn('credentials', formData);
     // revalidatePath('/dashboard');
     // redirect('/dashboard');
   } catch (error) {
-    /* console.log('here-moreinfo', error instanceof (Error) ? error.cause + ' -here-123- ' + error.message : 'Unknown error');
-    return 'Invalid credentials. Please try again.'; */
+    /*return 'Invalid credentials. Please try again.'; */
     if (error instanceof AuthError || error instanceof CredentialsSignin
     ) {
       console.log('Authenticating user error...', error.type);
@@ -331,7 +331,8 @@ export async function authenticate(
     } else if (error instanceof Verification) {
       // console.log("Verification1 ", error.message); */
     if (error instanceof Error) {
-      console.log(error.message, error.cause);
+      console.log(error.message);
+      console.log(error.cause);
       if (error.message == "NEXT_REDIRECT" ||
         error.message.includes('Cannot read properties of undefined ')
       ) {

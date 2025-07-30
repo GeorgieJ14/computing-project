@@ -331,7 +331,9 @@ export async function authenticate(
     } else if (error instanceof Verification) {
       // console.log("Verification1 ", error.message); */
     if (error instanceof Error) {
-      if (error.message == "NEXT_REDIRECT") {
+      if (error.message == "NEXT_REDIRECT" ||
+        error.message.includes('Cannot read properties of undefined ')
+      ) {
         redirect('/dashboard');
       }
 

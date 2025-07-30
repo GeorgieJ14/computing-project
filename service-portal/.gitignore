@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/node_modulesbackup
 /.pnp
 .pnp.*
 .yarn/*
@@ -15,6 +16,7 @@
 
 # next.js
 /.next/
+/.nextb/
 # /.next/cache/
 /out/
 
@@ -45,3 +47,6 @@ next-env.d.ts
 /lib/database/generated/prisma
 /logs/
 /public/file_uploads/
+
+packagebackup-lock.json
+

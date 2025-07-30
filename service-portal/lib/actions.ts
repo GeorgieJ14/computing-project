@@ -335,8 +335,9 @@ export async function authenticate(
         redirect('/dashboard');
       }
 
-      // console.log(error.type);
-      console.log("Error1", error.cause);
+      console.log(error.type);
+      console.log(error.message, "Error1");
+      console.log(error.cause);
       // revalidatePath('/dashboard');
       return 'Invalid credentials. Please try again.';
     }

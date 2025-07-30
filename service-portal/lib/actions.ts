@@ -325,7 +325,9 @@ export async function authenticate(
     if (error instanceof AdapterError || error instanceof EmailSignInError ||
       error instanceof SignInError || error instanceof Verification || error instanceof Error
     ) {
-      console.log(error.type, error.cause);
+      console.log(error.type);
+      console.log(error.cause);
+      console.log(error.message);
       // revalidatePath('/dashboard');
       // redirect('/dashboard');
       return 'Invalid credentials. Please try again.';

@@ -29,11 +29,17 @@ export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
     Credentials({
+      credentials: {
+        // username: { label: "Username" },
+        email: { label: "E-mail", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
       async authorize(credentials) {
         const parsedCredentials = z
-          .object({ email: z.string(), // .email(),
-            password: z.string().min(6) })
-          .safeParse(credentials);
+          .object({ 
+            email: z.string(), // .email(),
+            password: z.string().min(6) 
+          }).safeParse(credentials);
 
         console.log('Parsed credentials:', parsedCredentials);
         if (parsedCredentials.success) {

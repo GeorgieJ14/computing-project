@@ -307,14 +307,14 @@ export async function authenticate(
 ) {
   try {
     await signIn('credentials', formData);
-    revalidatePath('/dashboard');
-    redirect('/dashboard');
+    // revalidatePath('/dashboard');
+    // redirect('/dashboard');
   } catch (error) {
     /* console.log('here-moreinfo', error instanceof (Error) ? error.cause + ' -here-123- ' + error.message : 'Unknown error');
     return 'Invalid credentials. Please try again.'; */
     if (error instanceof AuthError || error instanceof CredentialsSignin
     ) {
-      // console.log('Authenticating user error...', error.type);
+      console.log('Authenticating user error...', error.type);
       switch (error.type) {
         case 'CredentialsSignin':
           return 'Invalid credentials.';
@@ -325,12 +325,12 @@ export async function authenticate(
     if (error instanceof AdapterError || error instanceof EmailSignInError ||
       error instanceof SignInError || error instanceof Verification || error instanceof Error
     ) {
-      // console.log(error.type, error.cause);
-      revalidatePath('/dashboard');
-      redirect('/dashboard');
+      console.log(error.type, error.cause);
+      // revalidatePath('/dashboard');
+      // redirect('/dashboard');
       return 'Invalid credentials. Please try again.';
     }
-    // console.log('12After switch-case user-error...', error instanceof AuthError ? error.type : 'Unknown type');
+    console.log('12After switch-case user-error...', error instanceof AuthError ? error.type : 'Unknown type');
     throw error;
   }
 }
@@ -355,8 +355,8 @@ export async function registerUser(
     return 'Failed to register user.';
   }
   await authenticate(prevState, formData);
-  revalidatePath('/dashboard');
-  redirect('/dashboard');
+  // revalidatePath('/dashboard');
+  // redirect('/dashboard');
 }
 
 /* export async function huggingFaceApi(tickets) {

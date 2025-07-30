@@ -322,16 +322,23 @@ export async function authenticate(
           return 'Something went wrong.';
       }
     }
-    if (error instanceof AdapterError || error instanceof EmailSignInError ||
-      error instanceof SignInError || error instanceof Verification || error instanceof Error
-    ) {
+    if (error instanceof AdapterError) {
+      console.log("AdapterError1 ", error.message);
+    } else if (error instanceof EmailSignInError) {
+      console.log("EmailSignInError1 ", error.message);
+    } else if (error instanceof SignInError) {
+      console.log("SignInError1 ", error.message);
+    } else if (error instanceof Verification) {
+      console.log("Verification1 ", error.message);
+    } else if (error instanceof Error) {
       console.log(error.type);
       console.log(error.cause);
-      console.log(error.message);
+      console.log("Error1 ", error.message);
       // revalidatePath('/dashboard');
       // redirect('/dashboard');
       return 'Invalid credentials. Please try again.';
     }
+
     console.log('12After switch-case user-error...', error instanceof AuthError ? error.type : 'Unknown type');
     throw error;
   }

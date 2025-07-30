@@ -331,13 +331,13 @@ export async function authenticate(
     } else if (error instanceof Verification) {
       // console.log("Verification1 ", error.message); */
     if (error instanceof Error) {
+      console.log(error.message, error.cause);
       if (error.message == "NEXT_REDIRECT" ||
         error.message.includes('Cannot read properties of undefined ')
       ) {
         redirect('/dashboard');
       }
 
-      console.log(error.type);
       console.log(error.message, "Error1");
       console.log(error.cause);
       // revalidatePath('/dashboard');

@@ -35,14 +35,14 @@ export const { auth, signIn, signOut } = NextAuth({
             password: z.string().min(6) })
           .safeParse(credentials);
 
-        // console.log('Parsed credentials:', parsedCredentials);
+        console.log('Parsed credentials:', parsedCredentials);
         if (parsedCredentials.success) {
           const { email, password } = parsedCredentials.data;
-          // console.log('reached here now 123');
+          console.log('reached here now 123');
           const user = await getUser(email);
-          // console.log('did reach here 456');
+          console.log('did reach here 456');
           if (!user) return null;
-          // console.log('reached here 7890') // user.email, user.password);
+          console.log('reached here 7890') // user.email, user.password);
           const passwordsMatch = await bcrypt.compare(password, user.password);
           if (passwordsMatch) return user;
         }

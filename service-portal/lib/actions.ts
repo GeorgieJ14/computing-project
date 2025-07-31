@@ -306,7 +306,10 @@ export async function authenticate(
   formData: FormData,
 ) {
   try {
-    console.log(formData, 'here-moreinfo');//, error instanceof (Error) ? error.cause + ' -here-123- ' + error.message : 'Unknown error');
+    console.log(formData.get("email"), 'here-moreinfo');//, error instanceof (Error) ? error.cause + ' -here-123- ' + error.message : 'Unknown error');
+    console.log(formData.get("password"));
+    formData.set('email', formData.get('1_email') as string);
+    formData.set('password', formData.get('1_password') as string);
     await signIn('credentials', formData);
     // revalidatePath('/dashboard');
     // redirect('/dashboard');

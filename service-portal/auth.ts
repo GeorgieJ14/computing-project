@@ -29,9 +29,9 @@ const authConfigVals = authConfig;
 authConfigVals.providers = [
   Credentials({
     credentials: {
-      // username: { label: "Username" },
-      email: { label: "E-mail", type: "email" },
-      password: { label: "Password", type: "password" },
+      // username: { label: "username" },
+      email: { label: "email", type: "email" },
+      password: { label: "password", type: "password" },
     },
     async authorize (credentials, request) {
       console.log('reached here now 123');

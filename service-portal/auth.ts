@@ -24,42 +24,43 @@ async function getUser(email: string): Promise<typeof prisma.user | undefined> {
     throw new Error('Failed to fetch user.');
   }
 }
-const authConfigVals = authConfig;
 
-authConfigVals.providers = [
-  CredentialsProvider({
-    id: "credentials",
-    name: "Credentials",
-    type: "credentials",
-    credentials: {
-      username: { label: "Username", type: "text" },
-      // email: { label: "E-mail", type: "email" },
-      password: { label: "Password", type: "password" },
-    },
-    async authorize (credentials, request) {
-      console.log('reached here now 123');
+export const { auth, signIn, signOut } = NextAuth({
+  ...authConfig,
+  providers: [
+    CredentialsProvider({
+      id: "credentials",
+      name: "Credentials",
+      type: "credentials",
+      credentials: {
+        username: { label: "Username", type: "text" },
+        // email: { label: "E-mail", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize (credentials, request) {
+        console.log('reached here now 123');
 
-      const parsedCredentials = z
-        .object({ 
-          username: z.string(), // .email(),
-          password: z.string().min(6) 
-        }).safeParse(credentials);
-  
-      console.log('Parsed credentials:', parsedCredentials);
-      if (parsedCredentials.success) {
-        const { email, password } = parsedCredentials.data;
-        const user = await getUser(email);
-        console.log('did reach here 456');
-        if (!user) return null;
-        const passwordsMatch = await bcrypt.compare(password, user.password);
-        console.log('reached here 7890') // user.email, user.password);
-        if (passwordsMatch) return user;
-      }
-  
-      // console.log('Invalid credentials. Hashes don\'t match.');
-      return null;
-    },
-  }),
-];
+        const parsedCredentials = z
+          .object({ 
+            username: z.string(), // .email(),
+            password: z.string().min(6) 
+          }).safeParse(credentials);
+        
+        console.log('Parsed credentials:', parsedCredentials);
+        if (parsedCredentials.success) {
+          const { email, password } = parsedCredentials.data;
+          const user = await getUser(email);
+          console.log('did reach here 456');
+          if (!user) return null;
+          const passwordsMatch = await bcrypt.compare(password, user.password);
+          console.log('reached here 7890') // user.email, user.password);
+          if (passwordsMatch) return user;
+        }
+      
+        // console.log('Invalid credentials. Hashes don\'t match.');
+        return null;
+      },
+    }),
+  ]
+});
 // console.log(authConfigVals);
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfigVals);

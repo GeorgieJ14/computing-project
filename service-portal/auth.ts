@@ -33,14 +33,15 @@ authConfigVals.providers = [
     type: "credentials",
     credentials: {
       username: { label: "Username", type: "text" },
-      email: { label: "E-mail", type: "email" },
+      // email: { label: "E-mail", type: "email" },
       password: { label: "Password", type: "password" },
     },
     async authorize (credentials, request) {
       console.log('reached here now 123');
+
       const parsedCredentials = z
         .object({ 
-          email: z.string(), // .email(),
+          username: z.string(), // .email(),
           password: z.string().min(6) 
         }).safeParse(credentials);
   

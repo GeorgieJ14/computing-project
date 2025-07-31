@@ -1,7 +1,7 @@
 // 'use server';
 
 import NextAuth from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
+import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 // import postgres from 'postgres';
 import { z } from 'zod';
@@ -27,7 +27,10 @@ async function getUser(email: string): Promise<typeof prisma.user | undefined> {
 const authConfigVals = authConfig;
 
 authConfigVals.providers = [
-  Credentials({
+  CredentialsProvider({
+    id: "credentials",
+    name: "Credentials",
+    type: "credentials",
     credentials: {
       username: { label: "Username", type: "text" },
       email: { label: "E-mail", type: "email" },

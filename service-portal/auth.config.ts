@@ -4,7 +4,7 @@ import prisma from "@/lib/database/prisma/prisma" */
 
 export const authConfig = {
   pages: {
-    signIn: '/',
+    signIn: '',
   },
   // adapter: PrismaAdapter(prisma),
   providers: [
@@ -12,10 +12,10 @@ export const authConfig = {
     // while this file is also used in non-Node.js environments
   ],
   callbacks: {
-    signIn({ user, account, profile, email, credentials }) {
+    /* signIn({ user, account, profile, email, credentials }) {
       console.log('auth.config.ts - signIn - User signed in:', user, account, profile, email, credentials);
       return true; // Allow sign-in
-    },
+    }, */
     authorized({ auth, request: { nextUrl } }) {
       // console.log('auth.config.ts - callback - Checking authorization...');
       const isLoggedIn = !!auth?.user;

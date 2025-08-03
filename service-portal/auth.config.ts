@@ -22,24 +22,24 @@ export const authConfig = {
   },
   cookies: {
     sessionToken: {
-      name: '__Secure-authjs.session-token', // Cookie name for session token
+      name: 'authjs.session-token', // Cookie name for session token
       options: {
         secure: process.env.NODE_ENV === "production", // Set to true in production
-        sameSite: "none", // Allows cookies to be sent across different origins
+        sameSite: process.env.NODE_ENV === "production" ? "none" : 'lax', // Allows cookies to be sent across different origins
       }
     },
     csrfToken: {
-      name: '__Host-authjs.csrf-token', // Cookie name for CSRF token
+      name: 'authjs.csrf-token', // Cookie name for CSRF token
       options: {
         secure: process.env.NODE_ENV === "production", // Set to true in production
-        sameSite: "none", // Allows cookies to be sent across different origins
+        sameSite: process.env.NODE_ENV === "production" ? "none" : 'lax', // Allows cookies to be sent across different origins
       },
     },
     callbackUrl: {
-      name: '__Secure-authjs.callback-url', // Cookie name for callback URL
+      name: 'authjs.callback-url', // Cookie name for callback URL
       options: {
         secure: process.env.NODE_ENV === "production", // Set to true in production
-        sameSite: "none", // Allows cookies to be sent across different origins
+        sameSite: process.env.NODE_ENV === "production" ? "none" : 'lax', // Allows cookies to be sent across different origins
       },
     },
   },
@@ -66,5 +66,13 @@ export const authConfig = {
       }
       return true;
     },
+    /* jwt: async ({ token, user }) => {
+      // console.log('auth.config.ts - jwt - Token:', token, 'User:', user);
+      if (user) {
+        // If user exists, add user information to the token
+        token.user = user;
+      }
+      return token;
+    } */
   },
 } satisfies NextAuthConfig;

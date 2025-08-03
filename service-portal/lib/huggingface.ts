@@ -108,7 +108,11 @@ export async function huggingFaceApi(
           response: response1[0]?.label ? "Label: " + response1[0].label +
             ", Score: " + response1[0].score + ", Label: " + response1[1].label +
             ", Score: " + response1[1].score : '',
-          ticketId: ticket.id,
+          ticket: {
+            connect: {
+              id: ticket.id,
+            }
+          },
           categoryPredictionLog: {
             create: {
               categoryId: spamCatg1?.id ?? null,

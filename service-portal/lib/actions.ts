@@ -92,20 +92,23 @@ export async function createTicket(prevState: State, formData: FormData) {
   const files = formData.getAll('attachments');
 
   const filesArray1 = Array.isArray(files) ? await Promise.all(
-    files?.map(async (file1) => {
-      const fileObj1 = {
-        userId: userId,
-        fileName: file1.name.replaceAll(' ', '_'),
-        size: file1.size,
-        type: 'image',
-        contentType: file1.type,
-      };
-      await writeFile(
-        path.join(process.cwd(), 'public/file_uploads/ticket_images', fileObj1.fileName),
-        Buffer.from(await file1?.arrayBuffer()),
-      );
-      return fileObj1;
+    files?.filter(async (file1) => file1.size > 0).map(async (file1) => {
+      if (file1.size) {
+        const fileObj1 = {
+          userId: userId,
+          fileName: file1.name.replaceAll(' ', '_'),
+          size: file1.size,
+          type: 'image',
+          contentType: file1.type,
+        };
+        await writeFile(
+          path.join(process.cwd(), 'public/file_uploads/ticket_images', fileObj1.fileName),
+          Buffer.from(await file1?.arrayBuffer()),
+        );
+        return fileObj1;
+      }
   })) : [];
+
 
   // Insert data into the database
   try {

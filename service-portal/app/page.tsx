@@ -17,7 +17,7 @@ export default async function Home() {
         <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 mt-0 md:-mt-0">
           <Suspense fallback={<p>Loading...</p>}>
             <LoginForm />
-            {/* <SignUpForm roles={roles} /> */}
+            <SignUpForm roles={roles} />
           </Suspense>
         </div>
       </main>

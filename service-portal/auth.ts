@@ -1,7 +1,7 @@
 // 'use server';
 
 import NextAuth from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
 // import postgres from 'postgres';
 import { z } from 'zod';
@@ -25,24 +25,24 @@ async function getUser(email: string): Promise<typeof prisma.user | undefined> {
   }
 }
 
-export const { auth, signIn, signOut } = NextAuth({
+export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
-    CredentialsProvider({
-      id: "credentials",
+    Credentials({
+      /* id: "credentials",
       name: "Credentials",
-      type: "credentials",
+      type: "credentials", */
       credentials: {
-        username: { label: "Username", type: "text" },
-        // email: { label: "E-mail", type: "email" },
+        // username: { label: "Username", type: "text" },
+        email: { label: "E-mail", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize (credentials, request) {
+      authorize: async (credentials, request) => {
         console.log('reached here now 123');
 
         const parsedCredentials = z
           .object({ 
-            username: z.string(), // .email(),
+            email: z.string(), // .email(),
             password: z.string().min(6) 
           }).safeParse(credentials);
         

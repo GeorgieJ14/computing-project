@@ -20,6 +20,16 @@ export const authConfig = {
   session: {
     strategy: 'jwt', // 'database' | 'jwt'
   },
+  cookies: {
+    sessionToken: {
+      options: {
+        secure: process.env.NODE_ENV === "production", // Set to true in production
+        sameSite: "none", // Allows cookies to be sent across different origins
+      }
+    }
+
+
+  },
   debug: true,
   // adapter: PrismaAdapter(prisma),
   providers: [

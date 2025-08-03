@@ -22,13 +22,26 @@ export const authConfig = {
   },
   cookies: {
     sessionToken: {
+      name: '__Secure-authjs.session-token', // Cookie name for session token
       options: {
         secure: process.env.NODE_ENV === "production", // Set to true in production
         sameSite: "none", // Allows cookies to be sent across different origins
       }
-    }
-
-
+    },
+    csrfToken: {
+      name: '__Host-authjs.csrf-token', // Cookie name for CSRF token
+      options: {
+        secure: process.env.NODE_ENV === "production", // Set to true in production
+        sameSite: "none", // Allows cookies to be sent across different origins
+      },
+    },
+    callbackUrl: {
+      name: '__Secure-authjs.callback-url', // Cookie name for callback URL
+      options: {
+        secure: process.env.NODE_ENV === "production", // Set to true in production
+        sameSite: "none", // Allows cookies to be sent across different origins
+      },
+    },
   },
   debug: true,
   // adapter: PrismaAdapter(prisma),

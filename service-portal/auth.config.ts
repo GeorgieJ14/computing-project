@@ -74,5 +74,9 @@ export const authConfig = {
       }
       return token;
     } */
+    useSecureCookies: false, //() => process.env.NODE_ENV === 'production',
+    //  Use secure cookies in production
+    skipCSRFCheck: () => true, // Skip CSRF check for all requests
+    trustHost: () => true, // Trust the host for all requests
   },
 } satisfies NextAuthConfig;

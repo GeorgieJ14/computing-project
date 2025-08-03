@@ -6,6 +6,21 @@ export const authConfig = {
   pages: {
     signIn: '/',
   },
+  events: {
+    async signIn({ user, account, profile, isNewUser }) {
+      console.log("User signed in!", user);
+    },
+    async session({ session, token }) {
+      console.log("Session updated!", session);
+      console.log(token);
+      // You can add custom session handling logic here if needed
+      return session;
+    }
+  },
+  session: {
+    strategy: 'jwt', // 'database' | 'jwt'
+  },
+  debug: true,
   // adapter: PrismaAdapter(prisma),
   providers: [
     // added later in auth.ts since it requires bcrypt which is only compatible with Node.js

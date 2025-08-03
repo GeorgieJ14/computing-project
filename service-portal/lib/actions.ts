@@ -337,10 +337,9 @@ export async function authenticate(
       // console.log("SignInError1 ", error.message);
     } else if (error instanceof Verification) {
       // console.log("Verification1 ", error.message); */
-    if (error instanceof AuthError || error instanceof Error) {
+    if (error instanceof Error) {
       console.log(error.message);
       console.log(error.cause);
-      console.log(error.type);
       if (error.message == "NEXT_REDIRECT" ||
         error.message.includes('Cannot read properties of undefined ')
       ) {
@@ -348,6 +347,7 @@ export async function authenticate(
       }
 
       console.log(error.message, "Error1");
+      console.log(error.cause);
       // revalidatePath('/dashboard');
       return 'Invalid credentials. Please try again.';
     }

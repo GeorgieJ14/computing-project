@@ -16,15 +16,15 @@ export const authConfig = {
       console.log('auth.config.ts - signIn - User signed in:', user, account, profile, email, credentials);
       return true; // Allow sign-in
     }, */
-    authorized({ auth, request: { nextUrl } }) {
+    async authorized({ request, auth }) {
       // console.log('auth.config.ts - callback - Checking authorization...');
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
+      const isOnDashboard = request.nextUrl.pathname.startsWith('/dashboard');
       if (isOnDashboard) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
-        return Response.redirect(new URL('/dashboard', nextUrl));
+        return Response.redirect(new URL('/dashboard', request.nextUrl));
       }
       return true;
     },

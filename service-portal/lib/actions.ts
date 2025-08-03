@@ -8,10 +8,10 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError, CredentialsSignin } from 'next-auth';
-import AdapterError from 'next-auth';
+/* import AdapterError from 'next-auth';
 import EmailSignInError from 'next-auth';
 import SignInError from 'next-auth';
-import Verification from 'next-auth';
+import Verification from 'next-auth'; */
 import { writeFile } from 'fs/promises';
 import path from 'path';
 
@@ -337,9 +337,10 @@ export async function authenticate(
       // console.log("SignInError1 ", error.message);
     } else if (error instanceof Verification) {
       // console.log("Verification1 ", error.message); */
-    if (error instanceof Error) {
+    if (error instanceof AuthError || error instanceof Error) {
       console.log(error.message);
       console.log(error.cause);
+      console.log(error.type);
       if (error.message == "NEXT_REDIRECT" ||
         error.message.includes('Cannot read properties of undefined ')
       ) {
@@ -347,7 +348,6 @@ export async function authenticate(
       }
 
       console.log(error.message, "Error1");
-      console.log(error.cause);
       // revalidatePath('/dashboard');
       return 'Invalid credentials. Please try again.';
     }

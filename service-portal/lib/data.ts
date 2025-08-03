@@ -57,7 +57,11 @@ export async function fetchLatestTickets() {
           email: true,
         },
       },
-      attachments: true
+      attachments: {
+        where: {
+          deletedAt: null
+        }
+      }
     },
   };
 
@@ -473,7 +477,11 @@ export async function fetchTicketById(id: number) {
             image_url: true,
           },
         },
-        attachments: true,
+        attachments: {
+          where: {
+            deletedAt: null,
+          }
+        },
         category: true, // Include the category if needed
         assignedToUser: {
           select: {

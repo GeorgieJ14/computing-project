@@ -314,7 +314,13 @@ export async function authenticate(
     console.log(formData.get("email"), 'here-moreinfo');//, error instanceof (Error) ? error.cause + ' -here-123- ' + error.message : 'Unknown error');
     // console.log(formData.get("username"));
     console.log(formData.get("password"));
-    await signIn('credentials', formData);
+    const result = await signIn('credentials', {
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+      redirect: false
+    });
+    console.log('Authenticating user...');
+    console.log(result);
     // revalidatePath('/dashboard');
     // redirect('/dashboard');
   } catch (error) {

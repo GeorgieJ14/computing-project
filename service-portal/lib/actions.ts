@@ -306,17 +306,20 @@ export async function deleteCategory(id: number) {
 
 export async function authenticate(
   prevState: string | undefined,
-  formData: FormData,
+  formData: Promise<FormData>,
 ) {
   try {
-    // formData.set('username', formData.get('email') as string);
-    /*formData.set('password', formData.get('1_password') as string); */
-    console.log(formData.get("email"), 'here-moreinfo');//, error instanceof (Error) ? error.cause + ' -here-123- ' + error.message : 'Unknown error');
-    // console.log(formData.get("username"));
-    console.log(formData.get("password"));
+    const formData1 = await formData;
+    /*formData1.set('username', formData1.get('email') as string);
+    formData1.set('password', formData1.get('1_password') as string); */
+    console.log(formData1.get("email"), 'here-moreinfo');//, error instanceof (Error) ? error.cause + ' -here-123- ' + error.message : 'Unknown error');
+    // console.log(formData1.get("username"));
+    console.log(formData1.get("password"));
+    // formData1.set('redirect', false);
     const result = await signIn('credentials', {
-      email: formData.get('email') as string,
-      password: formData.get('password') as string,
+      email: formData1.get('email') as string,
+      password: formData1.get('password') as string,
+      redirectTo: formData1.get('redirectTo') as string || '/dashboard',
       redirect: false
     });
     console.log('Authenticating user...');

@@ -3,8 +3,9 @@ import type { NextAuthConfig } from 'next-auth';
 import prisma from "@/lib/database/prisma/prisma" */
 
 export const authConfig = {
+  secret: process.env.AUTH_SECRET,
   pages: {
-    signIn: '/',
+    signIn: '',
   },
   events: {
     async signIn({ user, account, profile, isNewUser }) {

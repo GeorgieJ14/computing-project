@@ -7,6 +7,7 @@ import prisma from '@/lib/database/prisma/prisma';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
+// import { signIn } from 'next-auth/react';
 import { AuthError, CredentialsSignin } from 'next-auth';
 /* import AdapterError from 'next-auth';
 import EmailSignInError from 'next-auth';
@@ -319,9 +320,16 @@ export async function authenticate(
     const result = await signIn('credentials', {
       email: formData1.get('email') as string,
       password: formData1.get('password') as string,
+      // callbackUrl:,
       redirectTo: formData1.get('redirectTo') as string || '/dashboard',
-      redirect: false
+      redirect: false,
     });
+
+    if (result?.error) {
+      console.error('Authentication error: ', result.error);
+      return 'Invalid credentials. Please try again.';
+    }
+
     console.log('Authenticating user...');
     console.log(result);
     // revalidatePath('/dashboard');

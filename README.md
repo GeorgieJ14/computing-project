@@ -1,4 +1,6 @@
-# Live app-website deployment url: https://servicerequestprojectapp.work.gd
+# <u>A.I enabled service-request web-portal</u>
+
+# Live app-website deployment url: https://35.224.66.255
 
 # Demo-video of A.I enabled service-ticket categorization / allocation : https://drive.google.com/file/d/1z88P7DkBldyFyKvS55rB-MBT2Hm0vVGd/
 
